@@ -90,9 +90,39 @@ const login = (req, res) => {
     });
 };
 
-//
+// update a user by id
+const updateUserById = (req, res) => {
+  const _id = req.params.id;
+  const filter = req.body;
+  Object.keys(filter).forEach((key) => {
+    filter[key] == "" && delete filter[key];
+  });
+  userModel
+    .findByIdAndUpdate({ _id }, req.body, { new: true })
+    .then((updatedUser) => {
+      if (!updatedUser) {
+        return res.status(404).json({
+          success: false,
+          message: `The User with id => ${_id} not found`,
+        });
+      }
+      res.status(202).json({
+        success: true,
+        message: `User updated`,
+        user: updatedUser,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
 
 module.exports = {
   register,
   login,
+  updateUserById,
 };
