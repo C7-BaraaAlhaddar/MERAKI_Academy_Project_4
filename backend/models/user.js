@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
   address: { type: String },
   email: { type: mongoose.SchemaTypes.Email, required: true, unique: true },
   password: { type: String, required: true },
-  role: { type: mongoose.Schema.Types.ObjectId, ref: "Role" },
+  role: { type: mongoose.Schema.Types.ObjectId, ref: "Role", required: true },
   cart: [{ type: mongoose.Schema.Types.ObjectId, ref: "Cart" }],
 });
 
