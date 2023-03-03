@@ -114,7 +114,7 @@ const getCategoryById = (req, res) => {
   const _id = req.params.id;
   articlesModel
     .findById(_id)
-    .populate("author", "firstName -_id")
+    .populate("products")
     .exec()
     .then((category) => {
       if (!category) {
