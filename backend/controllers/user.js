@@ -146,10 +146,40 @@ const deleteUserById = (req, res) => {
       });
     });
 };
+// get All users
+
+const getAllUsers = (req, res) => {
+  userModel
+    .find()
+    .populate("cart")
+    .exec()
+    .then((users) => {
+      if (users.length) {
+        res.status(200).json({
+          success: true,
+          message: `All the users`,
+          users: users,
+        });
+      } else {
+        res.status(200).json({
+          success: false,
+          message: `No users Yet`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
 
 module.exports = {
   register,
   login,
   updateUserById,
   deleteUserById,
+  getAllUsers,
 };

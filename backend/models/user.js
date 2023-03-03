@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   role: { type: mongoose.Schema.Types.ObjectId, ref: "Role", required: true },
   cart: [{ type: mongoose.Schema.Types.ObjectId, ref: "Cart" }],
+  orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
 });
 
 userSchema.pre("save", async function () {

@@ -109,4 +109,9 @@ const deleteCategoryById = (req, res) => {
     });
 };
 
-module.exports = { createCategory, updateCategoryById, getAllCategories };
+module.exports = {
+  createCategory,
+  updateCategoryById,
+  getAllCategories,
+  deleteCategoryById,
+};
