@@ -109,9 +109,38 @@ const deleteCategoryById = (req, res) => {
     });
 };
 
+// get category by id
+const getCategoryById = (req, res) => {
+  const _id = req.params.id;
+  articlesModel
+    .findById(_id)
+    .populate("author", "firstName -_id")
+    .exec()
+    .then((category) => {
+      if (!category) {
+        return res.status(404).json({
+          success: false,
+          message: `The category with id => ${id} not found`,
+        });
+      }
+      res.status(200).json({
+        success: true,
+        message: `The category ${id} `,
+        category: category,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
 module.exports = {
   createCategory,
   updateCategoryById,
   getAllCategories,
   deleteCategoryById,
+  getCategoryById,
 };
