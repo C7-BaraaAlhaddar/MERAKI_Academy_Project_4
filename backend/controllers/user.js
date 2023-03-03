@@ -63,9 +63,7 @@ const login = (req, res) => {
         }
         const payload = {
           userId: result._id,
-          author: result.firstName,
           role: result.role,
-          country: result.country,
         };
 
         const options = {
@@ -77,6 +75,7 @@ const login = (req, res) => {
           message: `Valid login credentials`,
           token: token,
           userId: result._id,
+          cart: result.cart,
         });
       } catch (error) {
         throw new Error(error.message);
@@ -90,6 +89,8 @@ const login = (req, res) => {
       });
     });
 };
+
+//
 
 module.exports = {
   register,
