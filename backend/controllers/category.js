@@ -3,6 +3,35 @@ const categoryModel = require("../models/category");
 
 //
 
+// get all categories
+const getAllCategories = (req, res) => {
+  categoryModel
+    .find()
+    .populate("products")
+    .exec()
+    .then((categories) => {
+      if (categories.length) {
+        res.status(200).json({
+          success: true,
+          message: `All the categories`,
+          categories: categories,
+        });
+      } else {
+        res.status(200).json({
+          success: false,
+          message: `No categories Yet`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
+
 // create a category
 const createCategory = (req, res) => {
   const { categoryName } = req.body;
@@ -54,4 +83,4 @@ const updateCategoryById = (req, res) => {
     });
 };
 
-module.exports = { createCategory, updateCategoryById };
+module.exports = { createCategory, updateCategoryById, getAllCategories };
