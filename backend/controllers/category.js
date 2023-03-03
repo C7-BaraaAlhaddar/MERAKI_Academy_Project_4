@@ -82,4 +82,31 @@ const updateCategoryById = (req, res) => {
     });
 };
 
+// delete a category by id
+
+const deleteCategoryById = (req, res) => {
+  const id = req.params.id;
+  categoryModel
+    .findByIdAndDelete(id)
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message: `The Category with id => ${id} not found`,
+        });
+      }
+      res.status(200).json({
+        success: true,
+        message: `Category deleted`,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
+
 module.exports = { createCategory, updateCategoryById, getAllCategories };
