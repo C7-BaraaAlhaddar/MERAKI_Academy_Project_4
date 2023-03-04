@@ -93,3 +93,34 @@ const getProductById = (req, res) => {
       });
     });
 };
+
+// update a product by id
+const updateProductById = (req, res) => {
+  const _id = req.params.id;
+  const filter = req.body;
+  Object.keys(filter).forEach((key) => {
+    filter[key] == "" && delete filter[key];
+  });
+  productModel
+    .findByIdAndUpdate({ _id }, req.body, { new: true })
+    .then((updatedProduct) => {
+      if (!updatedProduct) {
+        return res.status(404).json({
+          success: false,
+          message: `The product with id => ${id} not found`,
+        });
+      }
+      res.status(202).json({
+        success: true,
+        message: `product updated`,
+        product: updatedProduct,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
