@@ -5,6 +5,8 @@ const {
   updateUserById,
   deleteUserById,
   getAllUsers,
+  addToCart,
+  removeFromCart,
 } = require("../controllers/user");
 
 //
@@ -18,6 +20,8 @@ userRouter.post("/login", login);
 userRouter.put("/:id", updateUserById);
 userRouter.delete("/:id", deleteUserById);
 userRouter.get("/", getAllUsers);
+userRouter.put("/cart/:id", addToCart);
+userRouter.put("/cart2/:id", removeFromCart);
 
 //
 

@@ -176,10 +176,65 @@ const getAllUsers = (req, res) => {
     });
 };
 
+// add to cart
+const addToCart = (req, res) => {
+  const productId = req.params.id;
+  const userId = req.token.userId;
+  userModel
+    .findByIdAndUpdate({ _id: userId }, { $push: { cart: { $in: productId } } })
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message: `The user with id => ${userId} not found`,
+        });
+      }
+      res.status(201).json({
+        success: true,
+        message: `added to cart`,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
+// remove from cart
+const removeFromCart = (req, res) => {
+  const productId = req.params.id;
+  const userId = req.token.userId;
+  userModel
+    .findByIdAndUpdate({ _id: userId }, { $pull: { cart: productId } })
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message: `The user with id => ${userId} not found`,
+        });
+      }
+      res.status(201).json({
+        success: true,
+        message: `removed from cart`,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
+
 module.exports = {
   register,
   login,
   updateUserById,
   deleteUserById,
   getAllUsers,
+  addToCart,
+  removeFromCart,
 };
