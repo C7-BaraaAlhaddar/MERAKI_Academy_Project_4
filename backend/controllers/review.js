@@ -1,28 +1,29 @@
-const commentModel = require("../models/comment");
+const reviewModel = require("../models/review");
 const productModel = require("../models/product");
 
-const createNewComment = (req, res) => {
+const createNewReview = (req, res) => {
   const _id = req.params.id;
-  const { comment } = req.body;
-  const commenter = req.token.userId;
-  const newComment = new commentModel({
+  const { comment, rate } = req.body;
+  const user = req.token.userId;
+  const newReview = new reviewModel({
     comment,
-    commenter,
+    rate,
+    user,
   });
-  newComment
+  newReview
     .save()
     .then((result) => {
       productModel
         .findByIdAndUpdate(
           { _id },
-          { $push: { comments: result._id } },
+          { $push: { reviews: result._id } },
           { new: true }
         )
         .then(() => {
           res.status(201).json({
             success: true,
-            message: `Comment added`,
-            comment: result,
+            message: `Review added`,
+            review: result,
           });
         })
         .catch((err) => {
@@ -43,5 +44,5 @@ const createNewComment = (req, res) => {
 };
 
 module.exports = {
-  createNewComment,
+  createNewReview,
 };
