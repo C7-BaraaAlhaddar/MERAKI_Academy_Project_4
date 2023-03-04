@@ -3,7 +3,7 @@ const productModel = require("../models/product");
 //
 
 // create a product
-createProduct = (req, res) => {
+const createProduct = (req, res) => {
   const { label, price, brand, img, description, quantity, category } =
     req.body;
 
@@ -123,4 +123,69 @@ const updateProductById = (req, res) => {
         err: err.message,
       });
     });
+};
+
+// getProductsByCategory
+const getProductsByCategory = (req, res) => {
+  let category = req.params.author;
+
+  productModel
+    .findMany({ category })
+    .populate("category")
+    .exec()
+    .then((products) => {
+      if (!products.length) {
+        return res.status(404).json({
+          success: false,
+          message: `The category: ${category} has no products`,
+        });
+      }
+      res.status(200).json({
+        success: true,
+        message: `All the products for the category: ${category}`,
+        products: products,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
+
+// delete a product by id
+const deleteProductById = (req, res) => {
+  const _id = req.params.id;
+  productModel
+    .findByIdAndDelete(_id)
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message: `The product with id => ${id} not found`,
+        });
+      }
+      res.status(200).json({
+        success: true,
+        message: `product deleted`,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
+
+module.exports = {
+  createProduct,
+  getAllProducts,
+  getProductById,
+  updateProductById,
+  getProductsByCategory,
+  deleteProductById,
 };
