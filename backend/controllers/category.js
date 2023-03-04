@@ -33,8 +33,8 @@ const getAllCategories = (req, res) => {
 
 // create a category
 const createCategory = (req, res) => {
-  const { categoryName } = req.body;
-  const newCat = new categoryModel({ categoryName });
+  const { categoryName, img } = req.body;
+  const newCat = new categoryModel({ categoryName, img });
   newCat
     .save()
     .then((category) => {
