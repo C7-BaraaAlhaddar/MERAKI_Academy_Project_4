@@ -20,7 +20,7 @@ const userRouter = express.Router();
 
 userRouter.post("/register", register);
 userRouter.post("/login", login);
-userRouter.put("/:id", authentication, authorization("ADMIN"), updateUserById);
+userRouter.put("/:id", authentication, authorization("USER"), updateUserById);
 userRouter.delete(
   "/:id",
   authentication,
