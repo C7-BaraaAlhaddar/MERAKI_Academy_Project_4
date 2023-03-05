@@ -1,7 +1,6 @@
 import "./App.css";
 import React, { useEffect, useState, createContext } from "react";
 import { Routes, Route, redirect, useNavigate } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./components/Navbar";
 export const UserContext = createContext();
 

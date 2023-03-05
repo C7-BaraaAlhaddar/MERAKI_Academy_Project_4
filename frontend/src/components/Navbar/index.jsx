@@ -12,15 +12,25 @@ import { BsSearch } from "react-icons/bs";
 
 export default function index() {
   return (
-    <Navbar bg="warning" expand="lg">
+    <Navbar bg="warning" className="py-2" expand="lg">
       <Container>
         <Navbar.Brand href="#home">B Store</Navbar.Brand>
 
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle className="my-2" aria-controls="basic-navbar-nav" />
 
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <NavDropdown title="Profile" id="basic-nav-dropdown">
+            <InputGroup className="mb-auto">
+              <Form.Control
+                placeholder="Search"
+                aria-label="Search"
+                aria-describedby="basic-addon2"
+              />
+              <Button variant="outline-secondary" id="button-addon2">
+                <BsSearch style={{ marginBottom: "2px" }} />
+              </Button>
+            </InputGroup>
+            <NavDropdown title="Account" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Another action
@@ -32,16 +42,6 @@ export default function index() {
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="#link">Cart</Nav.Link>
-            <InputGroup className="mb-auto">
-              <Form.Control
-                placeholder="Search"
-                aria-label="Search"
-                aria-describedby="basic-addon2"
-              />
-              <Button variant="outline-secondary" id="button-addon2">
-                <BsSearch style={{ marginBottom: "2px" }} />
-              </Button>
-            </InputGroup>
           </Nav>
         </Navbar.Collapse>
       </Container>
