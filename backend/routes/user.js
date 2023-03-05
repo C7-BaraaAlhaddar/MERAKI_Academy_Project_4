@@ -20,11 +20,16 @@ const userRouter = express.Router();
 
 userRouter.post("/register", register);
 userRouter.post("/login", login);
-userRouter.put("/:id", updateUserById);
-userRouter.delete("/:id", deleteUserById);
-userRouter.get("/", getAllUsers);
-userRouter.put("/cart/:id", addToCart);
-userRouter.put("/cart2/:id", removeFromCart);
+userRouter.put("/:id", authentication, authorization("ADMIN"), updateUserById);
+userRouter.delete(
+  "/:id",
+  authentication,
+  authorization("ADMIN"),
+  deleteUserById
+);
+userRouter.get("/", authentication, authorization("ADMIN"), getAllUsers);
+userRouter.put("/cart/:id", authentication, addToCart);
+userRouter.put("/cart2/:id", authentication, removeFromCart);
 
 //
 

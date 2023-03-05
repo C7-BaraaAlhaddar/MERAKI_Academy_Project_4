@@ -46,6 +46,8 @@ const login = (req, res) => {
   userModel
     .findOne({ email })
     .populate("role", "-_id -__v")
+    .populate("cart")
+    .exec()
     .then(async (result) => {
       if (!result) {
         return res.status(403).json({
@@ -181,7 +183,11 @@ const addToCart = (req, res) => {
   const productId = req.params.id;
   const userId = req.token.userId;
   userModel
-    .findByIdAndUpdate({ _id: userId }, { $push: { cart: { $in: productId } } })
+    .findByIdAndUpdate(
+      { _id: userId },
+      { $push: { cart: productId } },
+      { new: true }
+    )
     .then((result) => {
       if (!result) {
         return res.status(404).json({
@@ -192,6 +198,7 @@ const addToCart = (req, res) => {
       res.status(201).json({
         success: true,
         message: `added to cart`,
+        result,
       });
     })
     .catch((err) => {
@@ -207,7 +214,11 @@ const removeFromCart = (req, res) => {
   const productId = req.params.id;
   const userId = req.token.userId;
   userModel
-    .findByIdAndUpdate({ _id: userId }, { $pull: { cart: productId } })
+    .findByIdAndUpdate(
+      { _id: userId },
+      { $pull: { cart: { $in: productId } } },
+      { new: true }
+    )
     .then((result) => {
       if (!result) {
         return res.status(404).json({
@@ -218,6 +229,7 @@ const removeFromCart = (req, res) => {
       res.status(201).json({
         success: true,
         message: `removed from cart`,
+        result,
       });
     })
     .catch((err) => {

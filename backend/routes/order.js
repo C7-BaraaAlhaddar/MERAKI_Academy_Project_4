@@ -13,10 +13,20 @@ const authorization = require("../middleware/authorization");
 
 const orderRouter = express.Router();
 
-orderRouter.get("/", getAllOrders);
-orderRouter.get("/:id", getOrderById);
-orderRouter.get("/user/:id", getOrdersByUser);
-orderRouter.post("/", createOrder);
-orderRouter.delete("/:id", deleteOrderById);
+orderRouter.get("/", authentication, authorization("ADMIN"), getAllOrders);
+orderRouter.get("/:id", authentication, authorization("ADMIN"), getOrderById);
+orderRouter.get(
+  "/user/:id",
+  authentication,
+  authorization("ADMIN"),
+  getOrdersByUser
+);
+orderRouter.post("/", authentication, createOrder);
+orderRouter.delete(
+  "/:id",
+  authentication,
+  authorization("ADMIN"),
+  deleteOrderById
+);
 
 module.exports = orderRouter;

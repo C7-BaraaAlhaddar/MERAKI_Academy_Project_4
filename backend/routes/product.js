@@ -18,8 +18,18 @@ const productRouter = express.Router();
 productRouter.get("/", getAllProducts);
 productRouter.get("/:id", getProductById);
 productRouter.get("/category/:id", getProductsByCategory);
-productRouter.put("/:id", updateProductById);
-productRouter.delete("/:id", deleteProductById);
-productRouter.post("/", createProduct);
+productRouter.put(
+  "/:id",
+  authentication,
+  authorization("ADMIN"),
+  updateProductById
+);
+productRouter.delete(
+  "/:id",
+  authentication,
+  authorization("ADMIN"),
+  deleteProductById
+);
+productRouter.post("/", authentication, authorization("ADMIN"), createProduct);
 //
 module.exports = productRouter;
