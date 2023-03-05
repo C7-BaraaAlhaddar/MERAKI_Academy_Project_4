@@ -8,6 +8,9 @@ const {
   deleteCategoryById,
   getCategoryById,
 } = require("../controllers/category");
+
+const authentication = require("../middleware/authentication");
+const authorization = require("../middleware/authorization");
 //
 const categoryRouter = express.Router();
 //

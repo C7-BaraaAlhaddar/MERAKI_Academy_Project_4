@@ -8,6 +8,10 @@ const {
   getProductsByCategory,
   deleteProductById,
 } = require("../controllers/product");
+
+const authentication = require("../middleware/authentication");
+const authorization = require("../middleware/authorization");
+
 //
 const productRouter = express.Router();
 //

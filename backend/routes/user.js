@@ -9,6 +9,9 @@ const {
   removeFromCart,
 } = require("../controllers/user");
 
+const authentication = require("../middleware/authentication");
+const authorization = require("../middleware/authorization");
+
 //
 
 const userRouter = express.Router();
