@@ -15,3 +15,5 @@ orderRouter.get("/:id", getOrderById);
 orderRouter.get("/user/:id", getOrdersByUser);
 orderRouter.post("/", createOrder);
 orderRouter.delete("/:id", deleteOrderById);
+
+module.exports = orderRouter;
