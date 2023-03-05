@@ -14,13 +14,14 @@ const userRouter = require("./routes/user");
 const roleRouter = require("./routes/role");
 const categoryRouter = require("./routes/category");
 const productRouter = require("./routes/product");
+const orderRouter = require("./routes/order");
 
 //
 app.use("/user", userRouter);
 app.use("/role", roleRouter);
 app.use("/category", categoryRouter);
 app.use("/product", productRouter);
-
+app.use("/order", orderRouter);
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
 

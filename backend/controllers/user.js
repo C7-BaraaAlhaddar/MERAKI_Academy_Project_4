@@ -154,7 +154,7 @@ const deleteUserById = (req, res) => {
 
 const getAllUsers = (req, res) => {
   userModel
-    .find()
+    .find({}, "-password")
     .populate("cart")
     .exec()
     .then((users) => {
@@ -200,7 +200,7 @@ const addToCart = (req, res) => {
       res.status(201).json({
         success: true,
         message: `added to cart`,
-        result,
+        cart: result.cart,
       });
     })
     .catch((err) => {
@@ -231,7 +231,7 @@ const removeFromCart = (req, res) => {
       res.status(201).json({
         success: true,
         message: `removed from cart`,
-        result,
+        cart: result.cart,
       });
     })
     .catch((err) => {

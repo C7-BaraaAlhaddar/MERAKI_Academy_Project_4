@@ -7,7 +7,7 @@ const orderSchema = new mongoose.Schema(
       { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
     ],
     total: { type: Number, required: true },
-    paymentsMethod: { type: String, required: true },
+    paymentMethod: { type: String, required: true },
     shipping: { type: Boolean, required: true },
     successfulPayment: { type: Boolean, required: true },
   },

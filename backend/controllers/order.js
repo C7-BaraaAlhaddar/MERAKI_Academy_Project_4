@@ -2,14 +2,14 @@ const orderModel = require("../models/order");
 
 // create an order
 const createOrder = (req, res) => {
-  const { user, orders, total, paymentsMethod, shipping, successfulPayment } =
+  const { orders, total, paymentMethod, shipping, successfulPayment } =
     req.body;
-
+  const user = req.token.userId;
   const newOrder = new orderModel({
     user,
     orders,
     total,
-    paymentsMethod,
+    paymentMethod,
     shipping,
     successfulPayment,
   });
@@ -37,7 +37,7 @@ const getAllOrders = (req, res) => {
   const userId = req.token.userId;
   orderModel
     .find()
-    .populate("user")
+    .populate("user", "-password")
     .populate("orders")
     .exec()
     .then((orders) => {
@@ -69,7 +69,7 @@ const getOrderById = (req, res) => {
   let id = req.params.id;
   orderModel
     .findById(id)
-    .populate("user")
+    .populate("user", "-password")
     .populate("orders")
     .exec()
     .then((order) => {
@@ -98,8 +98,8 @@ const getOrderById = (req, res) => {
 const getOrdersByUser = (req, res) => {
   let userId = req.params.id;
   orderModel
-    .findMany({ user: userId })
-    .populate("user")
+    .find({ user: userId })
+    .populate("user", "-password")
     .populate("orders")
     .exec()
     .then((orders) => {
@@ -132,7 +132,7 @@ const deleteOrderById = (req, res) => {
       if (!result) {
         return res.status(404).json({
           success: false,
-          message: `The order with id => ${id} not found`,
+          message: `The order with id => ${_id} not found`,
         });
       }
       res.status(200).json({

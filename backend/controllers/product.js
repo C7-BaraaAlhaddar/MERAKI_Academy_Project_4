@@ -39,6 +39,7 @@ const getAllProducts = (req, res) => {
   productModel
     .find()
     .populate("category")
+    .populate("reviews")
     .exec()
     .then((products) => {
       if (products.length) {
@@ -127,8 +128,9 @@ const updateProductById = (req, res) => {
 const getProductsByCategory = (req, res) => {
   let category = req.params.id;
   productModel
-    .findMany({ category })
+    .find({ category })
     .populate("category")
+    .populate("reviews")
     .exec()
     .then((products) => {
       if (!products.length) {
