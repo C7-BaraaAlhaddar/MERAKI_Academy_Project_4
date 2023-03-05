@@ -1,12 +1,20 @@
 import "./App.css";
-import React, { useState, createContext } from "react";
+import React, { useEffect, useState, createContext } from "react";
+import { Routes, Route, redirect, useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Navbar from "./components/Navbar";
+export const UserContext = createContext();
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Project 4 </h1>
-      </header>
-    </div>
+    <UserContext.Provider value={""}>
+      <div className="App">
+        <header className="App-header">
+          <Navbar />
+          <h1>Project 4 </h1>
+        </header>
+      </div>
+    </UserContext.Provider>
   );
 }
 
