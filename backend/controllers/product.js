@@ -127,8 +127,7 @@ const updateProductById = (req, res) => {
 
 // getProductsByCategory
 const getProductsByCategory = (req, res) => {
-  let category = req.params.author;
-
+  let category = req.params.id;
   productModel
     .findMany({ category })
     .populate("category")
