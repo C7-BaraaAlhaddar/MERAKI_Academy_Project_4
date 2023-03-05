@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const validator = require("validator");
+// const validator = require("validator");
 require("mongoose-type-email");
 mongoose.SchemaTypes.Email.defaults.message = "Email address is invalid";
 

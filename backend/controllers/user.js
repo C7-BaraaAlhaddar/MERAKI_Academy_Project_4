@@ -1,6 +1,7 @@
 const userModel = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const role = require("../models/role");
 
 // register function
 const register = (req, res) => {
@@ -78,6 +79,7 @@ const login = (req, res) => {
           token: token,
           userId: result._id,
           cart: result.cart,
+          role: result.role.role,
         });
       } catch (error) {
         throw new Error(error.message);

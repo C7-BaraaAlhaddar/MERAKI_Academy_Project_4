@@ -6,8 +6,6 @@ const categoryModel = require("../models/category");
 const getAllCategories = (req, res) => {
   categoryModel
     .find()
-    .populate("products")
-    .exec()
     .then((categories) => {
       if (categories.length) {
         res.status(200).json({
@@ -112,20 +110,18 @@ const deleteCategoryById = (req, res) => {
 // get category by id
 const getCategoryById = (req, res) => {
   const _id = req.params.id;
-  articlesModel
+  categoryModel
     .findById(_id)
-    .populate("products")
-    .exec()
     .then((category) => {
       if (!category) {
         return res.status(404).json({
           success: false,
-          message: `The category with id => ${id} not found`,
+          message: `The category with id => ${_id} not found`,
         });
       }
       res.status(200).json({
         success: true,
-        message: `The category ${id} `,
+        message: `The category ${_id} `,
         category: category,
       });
     })
