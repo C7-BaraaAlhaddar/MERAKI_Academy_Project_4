@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema(
     lastName: { type: String, required: true, trim: true },
     age: { type: Number, required: true },
     address: { type: String, required: true },
+    phoneNumber: { type: String, required: true },
     email: { type: mongoose.SchemaTypes.Email, required: true, unique: true },
     password: { type: String, required: true, minLength: 7 },
     role: { type: mongoose.Schema.Types.ObjectId, ref: "Role", required: true },

@@ -5,12 +5,22 @@ const role = require("../models/role");
 
 // register function
 const register = (req, res) => {
-  const { firstName, lastName, age, address, email, password, role } = req.body;
+  const {
+    firstName,
+    lastName,
+    age,
+    address,
+    email,
+    password,
+    role,
+    phoneNumber,
+  } = req.body;
   const user = new userModel({
     firstName,
     lastName,
     age,
     address,
+    phoneNumber,
     email,
     password,
     role,
