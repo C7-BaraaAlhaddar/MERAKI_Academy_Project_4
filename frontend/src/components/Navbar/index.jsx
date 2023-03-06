@@ -4,7 +4,6 @@ import {
   Navbar,
   Nav,
   Container,
-  React,
   Form,
   InputGroup,
 } from "react-bootstrap";
@@ -16,9 +15,9 @@ export default function index() {
       <Container>
         <Navbar.Brand href="#home">B Store</Navbar.Brand>
 
-        <Navbar.Toggle className="my-2" aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle className="my-2" aria-controls="nav-menu" />
 
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse id="nav-menu">
           <Nav className="ms-auto">
             <InputGroup className="mb-auto">
               <Form.Control

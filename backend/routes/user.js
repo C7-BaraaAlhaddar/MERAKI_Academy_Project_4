@@ -24,7 +24,7 @@ userRouter.put("/:id", authentication, authorization("USER"), updateUserById);
 userRouter.delete(
   "/:id",
   authentication,
-  authorization("ADMIN"),
+  authorization("USER"),
   deleteUserById
 );
 userRouter.get("/", authentication, authorization("ADMIN"), getAllUsers);

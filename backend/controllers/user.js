@@ -88,6 +88,7 @@ const login = (req, res) => {
           message: `Valid login credentials`,
           token: token,
           userId: result._id,
+          firstName: result.firstName,
           cart: result.cart,
           role: result.role.role,
         });
@@ -200,6 +201,8 @@ const addToCart = (req, res) => {
       { $push: { cart: productId } },
       { new: true }
     )
+    .populate("cart")
+    .exec()
     .then((result) => {
       if (!result) {
         return res.status(404).json({
@@ -231,6 +234,8 @@ const removeFromCart = (req, res) => {
       { $pull: { cart: { $in: productId } } },
       { new: true }
     )
+    .populate("cart")
+    .exec()
     .then((result) => {
       if (!result) {
         return res.status(404).json({
@@ -252,6 +257,8 @@ const removeFromCart = (req, res) => {
       });
     });
 };
+
+// getUsersCart
 
 module.exports = {
   register,
