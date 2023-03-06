@@ -31,13 +31,6 @@ export default function Register() {
     } else if (!validator.isEmail(e.target[2].value)) {
       return setRegisterError("Your Email is incorrect");
     }
-    // console.log(e.target[0].value);
-    // console.log(e.target[1].value);
-    // console.log(e.target[2].value);
-    // console.log(e.target[3].value);
-    // console.log(e.target[4].value);
-    // console.log(e.target[5].value);
-    // console.log(e.target[6].value);
 
     axios
       .post("http://localhost:5000/user/register", {
@@ -87,6 +80,9 @@ export default function Register() {
             <Form.Group className="mb-3" controlId="registerrEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" placeholder="Enter email" />
+              <Form.Text className="text-muted">
+                We'll never share your email with anyone else.
+              </Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="registerPassword">
