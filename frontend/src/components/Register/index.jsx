@@ -31,22 +31,31 @@ export default function Register() {
     } else if (!validator.isEmail(e.target[2].value)) {
       return setRegisterError("Your Email is incorrect");
     }
+    // console.log(e.target[0].value);
+    // console.log(e.target[1].value);
+    // console.log(e.target[2].value);
+    // console.log(e.target[3].value);
+    // console.log(e.target[4].value);
+    // console.log(e.target[5].value);
+    // console.log(e.target[6].value);
+
     axios
-      .post("localhost:5000/user/register", {
+      .post("http://localhost:5000/user/register", {
         firstName: e.target[0].value,
-        LastName: e.target[1].value,
+        lastName: e.target[1].value,
         email: e.target[2].value,
         password: e.target[3].value,
         address: e.target[4].value,
         age: e.target[5].value,
-        phoneNumber: e.target[0].value,
+        phoneNumber: e.target[6].value,
         role: "6404d1f5f0e7a330ba3c57b8",
       })
       .then((result) => {
         setRegisterError(null);
-        navigate("/login");
       })
-      .catch((error) => setRegisterError(error.response.data.message));
+      .catch((error) => {
+        setRegisterError(error.response.data.message);
+      });
   };
   return (
     <div className="register">
@@ -64,23 +73,23 @@ export default function Register() {
 
           <Form onSubmit={registerFunc}>
             <Row className="mb-3">
-              <Form.Group as={Col} controlId="formGridEmail">
+              <Form.Group as={Col} controlId="registerFName">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control type="text" placeholder="First name" />
               </Form.Group>
 
-              <Form.Group as={Col} controlId="formGridPassword">
+              <Form.Group as={Col} controlId="registerLName">
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control type="text" placeholder="Last name" />
               </Form.Group>
             </Row>
 
-            <Form.Group className="mb-3" controlId="formGridEmail">
+            <Form.Group className="mb-3" controlId="registerrEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" placeholder="Enter email" />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formGridPassword">
+            <Form.Group className="mb-3" controlId="registerPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Enter password" />
               <Form.Text id="passwordHelpBlock" muted>
@@ -90,18 +99,18 @@ export default function Register() {
               </Form.Text>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formGridAddress1">
+            <Form.Group className="mb-3" controlId="registerAddress">
               <Form.Label>Address</Form.Label>
               <Form.Control placeholder="1234 Main St" />
             </Form.Group>
 
             <Row className="mb-3">
-              <Form.Group as={Col} controlId="formGridAge">
+              <Form.Group as={Col} controlId="registerAge">
                 <Form.Label>Age</Form.Label>
                 <Form.Control placeholder="Age" />
               </Form.Group>
 
-              <Form.Group as={Col} controlId="formGridPhoneNumber">
+              <Form.Group as={Col} controlId="registerPhoneNumber">
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control placeholder="012 - 3456789" />
               </Form.Group>
@@ -109,7 +118,7 @@ export default function Register() {
             {registerError && <Alert variant="danger">{registerError}</Alert>}
 
             <Button variant="warning" type="submit">
-              Register
+              Sign Up
             </Button>
             <Card.Text
               style={{ fontSize: "15px", padding: "5px", margin: "5px" }}
