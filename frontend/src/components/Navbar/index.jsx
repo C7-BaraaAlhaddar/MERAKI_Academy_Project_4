@@ -11,7 +11,7 @@ import { BsSearch } from "react-icons/bs";
 
 export default function index() {
   return (
-    <Navbar bg="warning" className="py-2" expand="lg">
+    <Navbar bg="warning" className="py-2 fixed-top" expand="lg">
       <Container>
         <Navbar.Brand href="#home">B Store</Navbar.Brand>
 

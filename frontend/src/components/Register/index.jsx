@@ -1,4 +1,8 @@
-import React from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
+import axios from "axios";
+import validator from "validator";
+import { UserContext, UserContextProvider } from "../UserContext/index";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Button,
   Container,
@@ -8,7 +12,43 @@ import {
   Row,
   Card,
 } from "react-bootstrap";
-export default function index() {
+
+export default function Register() {
+  const [registerError, setRegisterError] = useState(null);
+
+  const registerFunc = (e) => {
+    e.preventDefault();
+    console.log(validator.isEmail("foo@bar.com"));
+    console.log(e.target[0]);
+    console.log(e.target[1]);
+    console.log(e.target[2]);
+    console.log(e.target[3]);
+    console.log(e.target[4]);
+    console.log(e.target[5]);
+    console.log(e.target[6]);
+    if (
+      e.target[0].value == "" ||
+      e.target[1].value == "" ||
+      e.target[2].value == "" ||
+      e.target[3].value == "" ||
+      e.target[4].value == "" ||
+      e.target[5].value == "" ||
+      e.target[6].value == ""
+    ) {
+      return setRegisterError("All fields are required");
+    } else if (validator.isEmail(e.target[2].value)) {
+      return setRegisterError("Your Email is incorrect");
+    }
+    axios.post("localhost:5000/user/register", {
+      firstName: e.target[0].value,
+      LastName: e.target[1].value,
+      email: e.target[2].value,
+      password: e.target[3].value,
+      address: e.target[4].value,
+      age: e.target[5].value,
+      phoneNumber: e.target[0].value,
+    });
+  };
   return (
     <div className="register">
       {" "}
@@ -23,12 +63,7 @@ export default function index() {
             <Card.Title style={{ fontSize: "50px" }}>Sign Up</Card.Title>
           </Container>
 
-          <Form
-            onSubmit={(e) => {
-              e.preventDefault();
-              console.log(e.target);
-            }}
-          >
+          <Form onSubmit={registerFunc}>
             <Row className="mb-3">
               <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>First Name</Form.Label>
