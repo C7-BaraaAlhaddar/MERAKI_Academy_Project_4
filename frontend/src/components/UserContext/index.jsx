@@ -8,7 +8,9 @@ const UserContextProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [userRole, setUserRole] = useState(localStorage.getItem("userRole"));
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
-  const [cart, setCart] = useState(localStorage.getItem("cart"));
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart")) ?? []
+  );
   const [userName, setUserName] = useState(localStorage.getItem("userName"));
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("token") ? true : false

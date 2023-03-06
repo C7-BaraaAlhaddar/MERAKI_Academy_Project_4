@@ -45,6 +45,7 @@ export default function Register() {
       })
       .then((result) => {
         setRegisterError(null);
+        navigate("/login");
       })
       .catch((error) => {
         setRegisterError(error.response.data.message);

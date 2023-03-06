@@ -2,16 +2,9 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import validator from "validator";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Button,
-  Container,
-  Form,
-  Alert,
-  Col,
-  Row,
-  Card,
-} from "react-bootstrap";
+import { Button, Container, Form, Alert, Card } from "react-bootstrap";
 import { UserContext } from "../UserContext";
+import { GoogleLogin } from "@react-oauth/google";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -56,7 +49,9 @@ export default function Login() {
         setUserId(data.userId);
         setUserName(data.firstName);
         setUserRole(data.role);
+        setLoginErrorMsg(null);
         setIsLoggedIn(true);
+        navigate("/");
       })
       .catch((error) => {
         setLoginErrorMsg(error.response.data.message);
@@ -83,14 +78,22 @@ export default function Login() {
                 We'll never share your email with anyone else.
               </Form.Text>
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
+            {loginErrorMsg && <Alert variant="danger">{loginErrorMsg}</Alert>}
             <Button variant="warning" type="submit">
               Sign In
-            </Button>
+            </Button>{" "}
+            <GoogleLogin
+              onSuccess={(responseMessage) => {
+                console.log(responseMessage);
+              }}
+              onError={(errorMessage) => {
+                console.log(errorMessage);
+              }}
+            />
             <Card.Text
               style={{ fontSize: "15px", padding: "5px", margin: "5px" }}
             >
