@@ -5,10 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button, Container, Form, Alert, Card } from "react-bootstrap";
 import { UserContext } from "../UserContext";
 import { GoogleLogin } from "@react-oauth/google";
-
+import jwt_decode from "jwt-decode";
 export default function Login() {
   const navigate = useNavigate();
-
+  const googleLoginSuccess = (data) => {
+    console.log(jwt_decode(data.credential));
+    const { email, given_name, family_name } = jwt_decode(data.credential);
+  };
   const [loginErrorMsg, setLoginErrorMsg] = useState(null);
   const {
     token,
@@ -86,14 +89,20 @@ export default function Login() {
             <Button variant="warning" type="submit">
               Sign In
             </Button>{" "}
-            <GoogleLogin
-              onSuccess={(responseMessage) => {
-                console.log(responseMessage);
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                margin: "10px",
               }}
-              onError={(errorMessage) => {
-                console.log(errorMessage);
-              }}
-            />
+            >
+              <GoogleLogin
+                onSuccess={googleLoginSuccess}
+                onError={(errorMessage) => {
+                  console.log(errorMessage);
+                }}
+              />
+            </div>
             <Card.Text
               style={{ fontSize: "15px", padding: "5px", margin: "5px" }}
             >

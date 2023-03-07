@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import validator from "validator";
 import { Link, useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode";
+
 import {
   Button,
   Container,
@@ -13,6 +16,28 @@ import {
 } from "react-bootstrap";
 
 export default function Register() {
+  const googleLoginSuccess = (data) => {
+    console.log(jwt_decode(data.credential));
+    const { email, given_name, family_name, sub } = jwt_decode(data.credential);
+    axios
+      .post("http://localhost:5000/user/register", {
+        firstName: given_name,
+        lastName: family_name,
+        email: email,
+        password: sub,
+        address: "No address",
+        age: 20,
+        phoneNumber: "No Phone Number",
+        role: "6404d1f5f0e7a330ba3c57b8",
+      })
+      .then((result) => {
+        setRegisterError(null);
+        navigate("/login");
+      })
+      .catch((error) => {
+        setRegisterError(error.response.data.message);
+      });
+  };
   const navigate = useNavigate();
   const [registerError, setRegisterError] = useState(null);
 
@@ -117,6 +142,20 @@ export default function Register() {
             <Button variant="warning" type="submit">
               Sign Up
             </Button>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                margin: "10px",
+              }}
+            >
+              <GoogleLogin
+                onSuccess={googleLoginSuccess}
+                onError={(errorMessage) => {
+                  console.log(errorMessage);
+                }}
+              />
+            </div>
             <Card.Text
               style={{ fontSize: "15px", padding: "5px", margin: "5px" }}
             >
