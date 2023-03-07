@@ -12,6 +12,7 @@ body {
   font-family: "Open Sans", sans-serif;
   text-align: center;
   background-color: #f0f0f0;
+  overflow-x: hidden;
 }
 .profile {
   display: grid;
