@@ -7,6 +7,7 @@ const {
   getAllUsers,
   addToCart,
   removeFromCart,
+  getUserById,
 } = require("../controllers/user");
 
 const authentication = require("../middleware/authentication");
@@ -29,6 +30,8 @@ userRouter.delete(
   deleteUserById
 );
 userRouter.get("/", authentication, authorization("ADMIN"), getAllUsers);
+userRouter.get("/userData", authentication, authorization("USER"), getUserById);
+
 userRouter.put("/cart/:id", authentication, addToCart);
 userRouter.put("/cart2/:id", authentication, removeFromCart);
 

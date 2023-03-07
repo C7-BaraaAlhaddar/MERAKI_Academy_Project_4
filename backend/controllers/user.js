@@ -191,6 +191,35 @@ const getAllUsers = (req, res) => {
     });
 };
 
+// get a user by id
+const getUserById = (req, res) => {
+  const _id = req.token.userId;
+  userModel
+    .findById({ _id }, "-password")
+    .populate("cart")
+    .exec()
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message: `The user with id => ${userId} not found`,
+        });
+      }
+      res.status(200).json({
+        success: true,
+        message: `added to cart`,
+        user: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
+
 // add to cart
 const addToCart = (req, res) => {
   const productId = req.params.id;
@@ -268,4 +297,5 @@ module.exports = {
   getAllUsers,
   addToCart,
   removeFromCart,
+  getUserById,
 };
