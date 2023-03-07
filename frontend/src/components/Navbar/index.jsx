@@ -1,3 +1,4 @@
+import React, { useState, useContext } from "react";
 import {
   Button,
   NavDropdown,
@@ -8,8 +9,37 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
+import { UserContext } from "../UserContext";
+import { useNavigate } from "react-router-dom";
 
-export default function index() {
+export default function NavbarMenu() {
+  const navigate = useNavigate();
+
+  const {
+    token,
+    setToken,
+    userId,
+    setUserId,
+    isLoggedIn,
+    setIsLoggedIn,
+    cart,
+    setCart,
+    userName,
+    setUserName,
+    userRole,
+    setUserRole,
+  } = useContext(UserContext);
+
+  const logOutFunc = () => {
+    setToken(null);
+    setUserId(null);
+    setIsLoggedIn(false);
+    setUserName(null);
+    setCart([]);
+    setUserRole(null);
+    localStorage.clear();
+    navigate("/");
+  };
   return (
     <Navbar bg="warning" className="py-2 fixed-top" expand="lg">
       <Container>
@@ -29,16 +59,40 @@ export default function index() {
                 <BsSearch style={{ marginBottom: "2px" }} />
               </Button>
             </InputGroup>
-            <NavDropdown title="Account" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
+            <NavDropdown
+              title={isLoggedIn ? `${userName}` : "Account"}
+              id="basic-nav-dropdown"
+            >
+              {isLoggedIn ? (
+                <>
+                  {" "}
+                  <NavDropdown.Item>Account</NavDropdown.Item>
+                  {userRole === "admin" && (
+                    <NavDropdown.Item>Admin Dashboard</NavDropdown.Item>
+                  )}
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={logOutFunc}>
+                    Sign out
+                  </NavDropdown.Item>
+                </>
+              ) : (
+                <>
+                  <NavDropdown.Item
+                    onClick={() => {
+                      navigate("/login");
+                    }}
+                  >
+                    Sign In
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    onClick={() => {
+                      navigate("/register");
+                    }}
+                  >
+                    Register
+                  </NavDropdown.Item>
+                </>
+              )}
             </NavDropdown>
             <Nav.Link href="#link">Cart</Nav.Link>
           </Nav>
