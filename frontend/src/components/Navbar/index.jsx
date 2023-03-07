@@ -11,7 +11,7 @@ import {
 import { BsSearch } from "react-icons/bs";
 import { UserContext } from "../UserContext";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 export default function NavbarMenu() {
   const navigate = useNavigate();
 
@@ -28,6 +28,8 @@ export default function NavbarMenu() {
     setUserName,
     userRole,
     setUserRole,
+    userData,
+    setUserData,
   } = useContext(UserContext);
 
   const logOutFunc = () => {
@@ -40,10 +42,28 @@ export default function NavbarMenu() {
     localStorage.clear();
     navigate("/");
   };
+  const accountFunc = () => {
+    axios
+      .get("http://localhost:5000/user/userData", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((result) => {
+        setUserData(result.data.user);
+        navigate(`/profile/${userId}`);
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <Navbar bg="warning" className="py-2 fixed-top" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">B Store</Navbar.Brand>
+        <Navbar.Brand
+          style={{ cursor: "pointer" }}
+          onClick={(e) => {
+            navigate("/");
+          }}
+        >
+          B Store
+        </Navbar.Brand>
 
         <Navbar.Toggle className="my-2" aria-controls="nav-menu" />
 
@@ -66,7 +86,9 @@ export default function NavbarMenu() {
               {isLoggedIn ? (
                 <>
                   {" "}
-                  <NavDropdown.Item>Account</NavDropdown.Item>
+                  <NavDropdown.Item onClick={accountFunc}>
+                    Account
+                  </NavDropdown.Item>
                   {userRole === "admin" && (
                     <NavDropdown.Item>Admin Dashboard</NavDropdown.Item>
                   )}

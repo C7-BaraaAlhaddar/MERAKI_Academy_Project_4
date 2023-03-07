@@ -207,7 +207,7 @@ const getUserById = (req, res) => {
       }
       res.status(200).json({
         success: true,
-        message: `added to cart`,
+        message: `User Data`,
         user: result,
       });
     })

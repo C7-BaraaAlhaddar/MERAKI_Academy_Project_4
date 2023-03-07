@@ -5,6 +5,7 @@ import NavbarMenu from "./components/Navbar";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Footer from "./components/Footer";
+import UserProfile from "./components/UserProfile";
 function App() {
   return (
     <>
@@ -12,8 +13,9 @@ function App() {
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profile/:id" element={<UserProfile />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

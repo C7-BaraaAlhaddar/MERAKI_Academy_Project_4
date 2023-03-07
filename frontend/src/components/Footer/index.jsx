@@ -16,7 +16,7 @@ export default function Footer() {
       style={{
         position: "absolute",
         bottom: "0",
-        width: "100%",
+        width: "100vw",
         height: "2.5rem",
       }}
     >

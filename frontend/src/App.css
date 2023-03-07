@@ -13,3 +13,14 @@ body {
   text-align: center;
   background-color: #f0f0f0;
 }
+.profile {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px;
+}
+.profile-headers {
+  /* background-color: red; */
+}
+.profile-data {
+  /* background-color: aqua; */
+}
