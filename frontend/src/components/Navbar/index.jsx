@@ -39,6 +39,7 @@ export default function NavbarMenu() {
     setUserName(null);
     setCart([]);
     setUserRole(null);
+    setUserData(null);
     localStorage.clear();
     navigate("/");
   };
@@ -49,6 +50,7 @@ export default function NavbarMenu() {
       })
       .then((result) => {
         setUserData(result.data.user);
+        localStorage.setItem("userData", JSON.stringify(userData));
         navigate(`/profile/${userId}`);
       })
       .catch((error) => console.log(error));

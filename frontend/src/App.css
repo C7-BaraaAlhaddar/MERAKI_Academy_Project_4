@@ -18,9 +18,7 @@ body {
   grid-template-columns: 1fr 2fr;
   gap: 10px;
 }
-.profile-headers {
-  /* background-color: red; */
-}
-.profile-data {
-  /* background-color: aqua; */
+
+.profile-field {
+  border-radius: 0.375rem;
 }
