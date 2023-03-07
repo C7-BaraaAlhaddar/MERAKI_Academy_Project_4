@@ -16,8 +16,9 @@ import {
 } from "react-bootstrap";
 
 export default function Register() {
-  const googleLoginSuccess = (data) => {
-    console.log(jwt_decode(data.credential));
+  const navigate = useNavigate();
+  const [registerError, setRegisterError] = useState(null);
+  const googleRegisterSuccess = (data) => {
     const { email, given_name, family_name, sub } = jwt_decode(data.credential);
     axios
       .post("http://localhost:5000/user/register", {
@@ -38,9 +39,6 @@ export default function Register() {
         setRegisterError(error.response.data.message);
       });
   };
-  const navigate = useNavigate();
-  const [registerError, setRegisterError] = useState(null);
-
   const registerFunc = (e) => {
     e.preventDefault();
     if (
@@ -150,7 +148,7 @@ export default function Register() {
               }}
             >
               <GoogleLogin
-                onSuccess={googleLoginSuccess}
+                onSuccess={googleRegisterSuccess}
                 onError={(errorMessage) => {
                   console.log(errorMessage);
                 }}

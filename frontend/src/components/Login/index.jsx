@@ -8,10 +8,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 export default function Login() {
   const navigate = useNavigate();
-  const googleLoginSuccess = (data) => {
-    console.log(jwt_decode(data.credential));
-    const { email, given_name, family_name } = jwt_decode(data.credential);
-  };
+
   const [loginErrorMsg, setLoginErrorMsg] = useState(null);
   const {
     token,
@@ -27,6 +24,34 @@ export default function Login() {
     userRole,
     setUserRole,
   } = useContext(UserContext);
+  const googleLoginSuccess = (data) => {
+    console.log(jwt_decode(data.credential));
+    const { email, sub } = jwt_decode(data.credential);
+    axios
+      .post("http://localhost:5000/user/login", {
+        email: email,
+        password: sub,
+      })
+      .then(({ data }) => {
+        console.log(data);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("cart", JSON.stringify(data.cart));
+        localStorage.setItem("userId", data.userId);
+        localStorage.setItem("userRole", data.role);
+        localStorage.setItem("userName", data.firstName);
+        setToken(data.token);
+        setCart(data.cart);
+        setUserId(data.userId);
+        setUserName(data.firstName);
+        setUserRole(data.role);
+        setLoginErrorMsg(null);
+        setIsLoggedIn(true);
+        navigate("/");
+      })
+      .catch((error) => {
+        setLoginErrorMsg(error.response.data.message);
+      });
+  };
   const loginFunc = (e) => {
     e.preventDefault();
     console.log(loginErrorMsg);
