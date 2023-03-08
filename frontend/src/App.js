@@ -7,15 +7,26 @@ import Login from "./components/Login";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import UserProfile from "./components/UserProfile";
+import NotFound from "./components/NotFound";
 function App() {
   return (
     <>
       <NavbarMenu />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <>
+              <Home />
+              <Footer />
+            </>
+          }
+        />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile/:id" element={<UserProfile />} />
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

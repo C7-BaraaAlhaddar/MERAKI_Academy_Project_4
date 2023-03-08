@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Hero from "../Hero";
 import About from "../About";
+
 export default function Home() {
   const navigate = useNavigate();
   const {

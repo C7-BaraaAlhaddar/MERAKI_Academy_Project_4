@@ -12,7 +12,9 @@ export default function Footer() {
         height: "2.5rem",
       }}
     >
-      <p style={{ margin: "auto" }}>THIS IS THE FOOTER</p>
+      <p style={{ margin: "auto", fontWeight: "lighter" }}>
+        &copy; B store , All rights reserved
+      </p>
     </Navbar>
   );
 }
