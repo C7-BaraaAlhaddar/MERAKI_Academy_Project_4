@@ -19,8 +19,38 @@ const UserContextProvider = ({ children }) => {
     localStorage.getItem("token") ? true : false
   );
   const [userData, setUserData] = useState(localStorage.getItem("userData"));
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState(
+    localStorage.getItem("products") ?? []
+  );
+  const [categories, setCategories] = useState(
+    localStorage.getItem("categories") ?? []
+  );
+  const addToCart = (id) => {
+    if (isLoggedIn) {
+      return () => {
+        axios
+          .put(`http://localhost:5000/user/cart/${id}`)
+          .then((result) => {
+            setCart(result.data.cart);
+            localStorage.setItem("cart", JSON.stringify(result.data.cart));
+          })
+          .catch((error) => console.log(error.response.message.data));
+      };
+    }
+  };
+  const removeFromCart = (id) => {
+    if (isLoggedIn) {
+      return () => {
+        axios
+          .put(`http://localhost:5000/user/cart2/${id}`)
+          .then((result) => {
+            setCart(result.data.cart);
+            localStorage.setItem("cart", JSON.stringify(result.data.cart));
+          })
+          .catch((error) => console.log(error.response.message.data));
+      };
+    }
+  };
 
   return (
     <UserContext.Provider
@@ -43,6 +73,8 @@ const UserContextProvider = ({ children }) => {
         setProducts,
         categories,
         setCategories,
+        addToCart,
+        removeFromCart,
       }}
     >
       {children}

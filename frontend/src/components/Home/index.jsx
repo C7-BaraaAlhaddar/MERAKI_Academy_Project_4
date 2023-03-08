@@ -34,10 +34,18 @@ export default function Home() {
       .get(`http://localhost:5000/category`)
       .then((result) => {
         setCategories(result.data.categories);
+        localStorage.setItem(
+          "categories",
+          JSON.stringify(result.data.categories)
+        );
         axios
           .get(`http://localhost:5000/product`)
           .then((result) => {
             setProducts(result.data.products);
+            localStorage.setItem(
+              "products",
+              JSON.stringify(result.data.products)
+            );
           })
           .catch((error) => console.log(error.response.data.message));
       })
@@ -63,7 +71,10 @@ export default function Home() {
                   <>
                     <Card style={{ width: "18rem", margin: "10px auto" }}>
                       <Card.Img
-                        style={{ height: "18rem" }}
+                        onClick={() => {
+                          navigate(`/product/${product._id}`);
+                        }}
+                        style={{ height: "18rem", cursor: "pointer" }}
                         variant="top"
                         src={product.img}
                       />
