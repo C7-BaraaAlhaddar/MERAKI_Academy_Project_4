@@ -74,7 +74,15 @@ export default function Home() {
                         <Card.Text style={{ fontSize: "15px" }}>
                           {product.price} JD
                         </Card.Text>
-                        <Button variant="warning">Add to cart</Button>
+                        <Button
+                          onClick={(e) => {
+                            if (!isLoggedIn) {
+                            }
+                          }}
+                          variant="warning"
+                        >
+                          Add to cart
+                        </Button>
                       </Card.Body>
                     </Card>
                   </>
