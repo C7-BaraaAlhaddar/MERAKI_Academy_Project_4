@@ -84,15 +84,35 @@ export default function Product() {
               </Button>
             </div>
           </div>
-          <div className="col-md">
+          <div style={{ textAlign: "start" }} className="col-md">
             {!productData.specs ? (
               <>
-                <h3>no specs</h3>
+                <ListGroup>
+                  <ListGroup.Item>
+                    <strong>No specs available</strong>
+                  </ListGroup.Item>
+                </ListGroup>
               </>
             ) : (
               <>
                 {productData.specs.gpu ? (
-                  <></>
+                  <>
+                    <ListGroup>
+                      <ListGroup.Item>
+                        <strong>CPU</strong> : {productData.specs.cpu}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        <strong>RAM</strong> : {productData.specs.ram}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        <strong>gpu</strong> : {productData.specs.gpu}
+                      </ListGroup.Item>
+
+                      <ListGroup.Item>
+                        <strong>Display</strong> : {productData.specs.monitor}
+                      </ListGroup.Item>
+                    </ListGroup>
+                  </>
                 ) : (
                   <>
                     <ListGroup>
