@@ -4,8 +4,7 @@ const productModel = require("../models/product");
 
 // create a product
 const createProduct = (req, res) => {
-  const { label, price, brand, img, description, quantity, category } =
-    req.body;
+  const { label, price, brand, img, description, category, specs } = req.body;
 
   const newProduct = new productModel({
     label,
@@ -13,8 +12,8 @@ const createProduct = (req, res) => {
     brand,
     img,
     description,
-    quantity,
     category,
+    specs,
   });
 
   newProduct

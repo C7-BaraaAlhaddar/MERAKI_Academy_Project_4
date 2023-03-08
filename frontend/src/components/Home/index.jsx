@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Carousel, Container } from "react-bootstrap";
 import { UserContext } from "../UserContext";
 import axios from "axios";
@@ -23,7 +23,28 @@ export default function Home() {
     setUserRole,
     userData,
     setUserData,
+    Products,
+    setProducts,
+    Categories,
+    setCategories,
   } = useContext(UserContext);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/category`)
+      .then((result) => {
+        setCategories(result.data.categories);
+        axios
+          .get(`http://localhost:5000/product`)
+          .then((result) => {
+            setProducts(result.data.products);
+          })
+          .catch((error) => console.log(error.response.data.message));
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+      });
+  }, []);
   return (
     <div>
       <Hero />

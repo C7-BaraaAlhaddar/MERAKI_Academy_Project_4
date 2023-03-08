@@ -26,7 +26,16 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/profile/:id" element={<UserProfile />} />
 
-        <Route path="*" element={<NotFound />} />
+        {/* Handling Undefined Routes */}
+        <Route
+          path="*"
+          element={
+            <>
+              <NotFound />
+              <Footer />
+            </>
+          }
+        />
       </Routes>
     </>
   );

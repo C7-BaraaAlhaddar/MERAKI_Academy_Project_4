@@ -9,7 +9,7 @@ export default function About() {
           <Accordion>
             <Accordion.Item eventKey="0">
               <Accordion.Header>
-                How much is the delivery cost ?
+                How much does the delivery cost ?
               </Accordion.Header>
               <Accordion.Body style={{ textAlign: "start" }}>
                 Its free.
