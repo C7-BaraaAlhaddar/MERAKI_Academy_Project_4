@@ -19,7 +19,7 @@ const UserContextProvider = ({ children }) => {
   );
   const [userData, setUserData] = useState(localStorage.getItem("userData"));
   const [Products, setProducts] = useState([]);
-  const [Categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   return (
     // the Provider gives access to the context to its children
@@ -41,7 +41,7 @@ const UserContextProvider = ({ children }) => {
         setUserData,
         Products,
         setProducts,
-        Categories,
+        categories,
         setCategories,
       }}
     >

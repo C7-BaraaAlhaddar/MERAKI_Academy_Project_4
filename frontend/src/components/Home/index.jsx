@@ -25,7 +25,7 @@ export default function Home() {
     setUserData,
     Products,
     setProducts,
-    Categories,
+    categories,
     setCategories,
   } = useContext(UserContext);
 
