@@ -3,7 +3,7 @@ export default function Footer() {
   return (
     <>
       <div
-        className="py-2 footer bg-warning text-dark"
+        className="py-2 footer"
         style={{
           position: "relative",
           bottom: "0",

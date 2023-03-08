@@ -26,3 +26,8 @@ body {
 .list-filter:hover {
   background-color: #f0f0f0;
 }
+.featured {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}

@@ -18,11 +18,10 @@ const UserContextProvider = ({ children }) => {
     localStorage.getItem("token") ? true : false
   );
   const [userData, setUserData] = useState(localStorage.getItem("userData"));
-  const [Products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
 
   return (
-    // the Provider gives access to the context to its children
     <UserContext.Provider
       value={{
         token,
@@ -39,7 +38,7 @@ const UserContextProvider = ({ children }) => {
         setUserRole,
         userData,
         setUserData,
-        Products,
+        products,
         setProducts,
         categories,
         setCategories,

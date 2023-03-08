@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Carousel, Container } from "react-bootstrap";
+import { Container, Card, Button } from "react-bootstrap";
 import { UserContext } from "../UserContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ export default function Home() {
     setUserRole,
     userData,
     setUserData,
-    Products,
+    products,
     setProducts,
     categories,
     setCategories,
@@ -48,7 +48,44 @@ export default function Home() {
   return (
     <div>
       <Hero />
+      <div>
+        <Container>
+          <div style={{ margin: "5px" }}>
+            <h4 style={{ fontWeight: "lighter", marginTop: "15px" }}>
+              New in stock
+            </h4>
+          </div>
+          <div className="featured">
+            {products
+              .filter((e, i) => i < 8)
+              .map((product) => {
+                return (
+                  <>
+                    <Card style={{ width: "18rem", margin: "10px auto" }}>
+                      <Card.Img
+                        style={{ height: "18rem" }}
+                        variant="top"
+                        src={product.img}
+                      />
+                      <Card.Body>
+                        <Card.Title style={{ fontSize: "15px" }}>
+                          {product.label}
+                        </Card.Title>
+                        <Card.Text style={{ fontSize: "15px" }}>
+                          {product.price} JD
+                        </Card.Text>
+                        <Button variant="warning">Add to cart</Button>
+                      </Card.Body>
+                    </Card>
+                  </>
+                );
+              })}
+          </div>
+        </Container>
+      </div>
       <About />
     </div>
   );
 }
+
+// console.log();
