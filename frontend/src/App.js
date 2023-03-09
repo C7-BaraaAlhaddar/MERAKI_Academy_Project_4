@@ -11,6 +11,7 @@ import Product from "./components/Product";
 import NotFound from "./components/NotFound";
 import ProductsPage from "./components/ProductsPage";
 import CategoryPage from "./components/CategoryPage";
+import Cart from "./components/Cart";
 function App() {
   return (
     <>
@@ -50,6 +51,15 @@ function App() {
           element={
             <>
               <CategoryPage />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <>
+              <Cart />
               <Footer />
             </>
           }

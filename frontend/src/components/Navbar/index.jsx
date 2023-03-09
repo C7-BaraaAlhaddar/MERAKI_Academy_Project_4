@@ -127,10 +127,8 @@ export default function NavbarMenu() {
                   </>
                 )}
               </NavDropdown>
-              <Nav.Link href="#link">Cart</Nav.Link>
-              <Button variant="warning" onClick={handleShow}>
-                Categories
-              </Button>
+              <Nav.Link onClick={(e) => navigate("/cart")}>Cart</Nav.Link>
+              <Nav.Link onClick={handleShow}>Categories</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

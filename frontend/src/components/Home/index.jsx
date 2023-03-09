@@ -59,8 +59,15 @@ export default function Home() {
       <div>
         <Container>
           <div style={{ margin: "5px" }}>
-            <h4 style={{ fontWeight: "lighter", marginTop: "15px" }}>
-              New in stock
+            <h4
+              className="title-name"
+              style={{
+                fontWeight: "lighter",
+                marginTop: "15px",
+                paddingTop: "10px",
+              }}
+            >
+              <span>Featured Products</span>
             </h4>
           </div>
           <div className="featured">

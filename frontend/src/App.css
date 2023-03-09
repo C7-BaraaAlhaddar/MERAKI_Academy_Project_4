@@ -32,3 +32,16 @@ body {
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
+.title-name {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid black;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+.title-name span {
+  background: #f0f0f0;
+  padding: 0 10px;
+}
