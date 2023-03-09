@@ -20,10 +20,10 @@ const UserContextProvider = ({ children }) => {
   );
   const [userData, setUserData] = useState(localStorage.getItem("userData"));
   const [products, setProducts] = useState(
-    localStorage.getItem("products") ?? []
+    JSON.parse(localStorage.getItem("products")) ?? []
   );
   const [categories, setCategories] = useState(
-    localStorage.getItem("categories") ?? []
+    JSON.parse(localStorage.getItem("categories")) ?? []
   );
   const addToCart = (id) => {
     if (isLoggedIn) {
