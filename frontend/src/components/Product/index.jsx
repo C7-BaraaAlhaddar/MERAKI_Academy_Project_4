@@ -83,7 +83,8 @@ export default function Product() {
             <div>
               <Button
                 onClick={(e) => {
-                  if (cart.includes(productData)) {
+                  const included = cart.find((e) => e._id === productData._id);
+                  if (!included) {
                     addToCart(productData._id);
                   }
                 }}

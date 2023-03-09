@@ -98,7 +98,10 @@ export default function Home() {
                       </Card.Text>
                       <Button
                         onClick={(e) => {
-                          if (!cart.includes(product)) {
+                          const included = cart.find(
+                            (e) => e._id === product._id
+                          );
+                          if (!included) {
                             addToCart(product._id);
                           }
                         }}

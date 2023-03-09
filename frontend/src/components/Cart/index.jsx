@@ -25,15 +25,85 @@ export default function Cart() {
     addToCart,
     removeFromCart,
   } = useContext(UserContext);
+
+  let total = cart.reduce((acc, e, i) => {
+    return acc + e.price;
+  }, 0);
   return (
     <>
       <Container>
         <div>
-          {" "}
-          <h1 style={{ margin: "300px" }}>Your Cart is Empty</h1>
-          <p>
-            <Link to={"/"}>return home</Link>
-          </p>
+          {cart.length > 0 ? (
+            <>
+              {cart.map((product) => {
+                return (
+                  <Card
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      margin: "20px",
+                      alignItems: "center",
+                    }}
+                    key={product._id}
+                  >
+                    <Card.Img
+                      style={{ height: "100px", width: "100px", margin: "5px" }}
+                      variant="top"
+                      src={product.img}
+                    />
+                    <Card.Body>
+                      <Card.Title>{product.label}</Card.Title>
+                      <Card.Text>
+                        <strong>{product.price} JD</strong>{" "}
+                      </Card.Text>
+                    </Card.Body>
+                    <div>
+                      {" "}
+                      <Button
+                        onClick={(e) => {
+                          removeFromCart(product._id);
+                        }}
+                        style={{ marginRight: "20px" }}
+                        variant="danger"
+                      >
+                        Remove from cart
+                      </Button>
+                    </div>
+                  </Card>
+                );
+              })}
+
+              <Card
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  margin: "20px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "20px",
+                }}
+              >
+                <div>
+                  {" "}
+                  <Card.Title>
+                    <strong>Total : {total} JD</strong>{" "}
+                  </Card.Title>
+                  <Button variant="warning">Check out</Button>
+                </div>
+              </Card>
+            </>
+          ) : (
+            <>
+              {" "}
+              <div>
+                {" "}
+                <h1 style={{ margin: "300px" }}>Your Cart is Empty</h1>
+                <p>
+                  <Link to={"/"}>return home</Link>
+                </p>
+              </div>
+            </>
+          )}
         </div>
       </Container>
     </>

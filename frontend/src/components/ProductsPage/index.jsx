@@ -64,7 +64,8 @@ export default function ProductsPage() {
                   </Card.Text>
                   <Button
                     onClick={(e) => {
-                      if (!isLoggedIn) {
+                      const included = cart.find((e) => e._id === product._id);
+                      if (!included) {
                         addToCart(product._id);
                       }
                     }}
