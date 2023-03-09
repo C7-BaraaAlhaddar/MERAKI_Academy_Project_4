@@ -43,7 +43,11 @@ export default function SearchPage() {
                       onClick={() => {
                         navigate(`/product/${product._id}`);
                       }}
-                      style={{ height: "18rem", cursor: "pointer" }}
+                      style={{
+                        height: "18rem",
+                        cursor: "pointer",
+                        padding: "5px",
+                      }}
                       variant="top"
                       src={product.img}
                     />
