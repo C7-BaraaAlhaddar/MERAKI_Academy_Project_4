@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import NavbarMenu from "./components/Navbar";
 import Register from "./components/Register";
@@ -12,6 +12,7 @@ import NotFound from "./components/NotFound";
 import ProductsPage from "./components/ProductsPage";
 import CategoryPage from "./components/CategoryPage";
 import Cart from "./components/Cart";
+import SearchPage from "./components/SearchPage";
 function App() {
   return (
     <>
@@ -42,6 +43,15 @@ function App() {
           element={
             <>
               <ProductsPage />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/search/:name"
+          element={
+            <>
+              <SearchPage />
               <Footer />
             </>
           }

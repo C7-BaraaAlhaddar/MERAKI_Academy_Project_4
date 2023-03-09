@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../UserContext";
 import { Container, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
 export default function Cart() {
   const {
     token,
@@ -88,7 +90,7 @@ export default function Cart() {
                   <Card.Title>
                     <strong>Total : {total} JD</strong>{" "}
                   </Card.Title>
-                  <Button variant="warning">Check out</Button>
+                  <Button variant="warning">Place order</Button>
                 </div>
               </Card>
             </>
@@ -108,4 +110,29 @@ export default function Cart() {
       </Container>
     </>
   );
+}
+
+{
+  /* <PayPalScriptProvider options={{ "client-id": "test" }}>
+                    <PayPalButtons
+                      createOrder={(data, actions) => {
+                        return actions.order.create({
+                          purchase_units: [
+                            {
+                              amount: {
+                                value: `${total}`,
+                              },
+                            },
+                          ],
+                        });
+                      }}
+                      onApprove={(data, actions) => {
+                        return actions.order.capture().then((details) => {
+                          const name = details.payer.name.given_name;
+                          console.log(details);
+                        });
+                      }}
+                      style={{ layout: "horizontal" }}
+                    />
+                  </PayPalScriptProvider> */
 }

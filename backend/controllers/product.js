@@ -35,8 +35,12 @@ const createProduct = (req, res) => {
 };
 // get all products
 const getAllProducts = (req, res) => {
+  let from = req.query.from;
+
   productModel
     .find()
+    .skip(from ?? 0)
+    .limit(8)
     .populate("category")
     .populate("reviews")
     .exec()
@@ -91,6 +95,8 @@ const getProductById = (req, res) => {
       });
     });
 };
+
+// searchProducts
 
 // update a product by id
 const updateProductById = (req, res) => {

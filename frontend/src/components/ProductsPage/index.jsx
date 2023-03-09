@@ -1,34 +1,23 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { UserContext } from "../UserContext";
-import { Container, Card, Button } from "react-bootstrap";
+import { Container, Card, Button, Pagination } from "react-bootstrap";
+import axios from "axios";
 
 export default function ProductsPage() {
   const navigate = useNavigate();
-  const {
-    token,
-    setToken,
-    userId,
-    setUserId,
-    isLoggedIn,
-    setIsLoggedIn,
-    cart,
-    setCart,
-    userName,
-    setUserName,
-    userRole,
-    setUserRole,
-    userData,
-    setUserData,
-    products,
-    setProducts,
-    categories,
-    setCategories,
-    addToCart,
-    removeFromCart,
-  } = useContext(UserContext);
-
+  const { cart, setCart, products, setProducts, addToCart, removeFromCart } =
+    useContext(UserContext);
+  const [page, setPage] = useState(0);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/product?from=${page}`)
+      .then((result) => {
+        setProducts(result.data.products);
+        localStorage.setItem("products", JSON.stringify(result.data.products));
+      })
+      .catch((error) => console.log(error.response.data.message));
+  }, [page]);
   return (
     <>
       <Container>
@@ -78,6 +67,23 @@ export default function ProductsPage() {
             );
           })}
         </div>
+        <Pagination style={{ display: "flex", justifyContent: "center" }}>
+          <Pagination.Prev
+            onClick={(e) => {
+              if (page > 0) {
+                setPage(page - 8);
+              }
+            }}
+          />
+
+          <Pagination.Next
+            onClick={(e) => {
+              if (products.length === 8) {
+                setPage(page + 8);
+              }
+            }}
+          />
+        </Pagination>
       </Container>
     </>
   );
