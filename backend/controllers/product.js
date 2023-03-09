@@ -142,6 +142,7 @@ const getProductsByCategory = (req, res) => {
         success: true,
         message: `All the products for the category: ${category}`,
         products: products,
+        categoryName: products[0].category.categoryName,
       });
     })
     .catch((err) => {

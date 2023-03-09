@@ -141,17 +141,28 @@ export default function NavbarMenu() {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <ListGroup style={{ cursor: "pointer" }}>
-            <ListGroup.Item className="list-filter">
+            <ListGroup.Item
+              onClick={(e) => {
+                navigate("/products");
+                handleClose();
+              }}
+              className="list-filter"
+            >
               All Products
             </ListGroup.Item>
 
             {categories.map((category) => {
               return (
-                <>
-                  <ListGroup.Item className="list-filter" key={category._id}>
-                    {category.categoryName}
-                  </ListGroup.Item>
-                </>
+                <ListGroup.Item
+                  key={category._id}
+                  onClick={(e) => {
+                    navigate(`/category/${category._id}`);
+                    handleClose();
+                  }}
+                  className="list-filter"
+                >
+                  {category.categoryName}
+                </ListGroup.Item>
               );
             })}
           </ListGroup>

@@ -1,11 +1,12 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { UserContext } from "../UserContext";
+import React, { useState, useContext, useEffect } from "react";
 import { Container, Card, Button } from "react-bootstrap";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import { UserContext } from "../UserContext";
 
-export default function ProductsPage() {
+export default function CategoryPage() {
   const navigate = useNavigate();
+  const { id } = useParams();
   const {
     token,
     setToken,
@@ -26,17 +27,29 @@ export default function ProductsPage() {
     categories,
     setCategories,
   } = useContext(UserContext);
-
+  const [categoryProducts, setCategoryProducts] = useState([]);
+  const [categoryName, setCategoryName] = useState("");
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/product/category/${id}`)
+      .then((result) => {
+        setCategoryProducts(result.data.products);
+        setCategoryName(result.data.categoryName);
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+      });
+  }, [categoryProducts, categoryName]);
   return (
     <>
       <Container>
         <div style={{ margin: "5px" }}>
           <h4 style={{ fontWeight: "lighter", marginTop: "15px" }}>
-            All Products
+            {categoryName}
           </h4>
         </div>
         <div className="products-box">
-          {products.map((product) => {
+          {categoryProducts.map((product) => {
             return (
               <>
                 <Card
