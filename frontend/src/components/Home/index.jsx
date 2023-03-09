@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Container, Card, Button } from "react-bootstrap";
 import { UserContext } from "../UserContext";
 import axios from "axios";
@@ -9,20 +9,8 @@ import About from "../About";
 export default function Home() {
   const navigate = useNavigate();
   const {
-    token,
-    setToken,
-    userId,
-    setUserId,
-    isLoggedIn,
-    setIsLoggedIn,
     cart,
     setCart,
-    userName,
-    setUserName,
-    userRole,
-    setUserRole,
-    userData,
-    setUserData,
     products,
     setProducts,
     categories,

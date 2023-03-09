@@ -9,28 +9,7 @@ import About from "../About";
 export default function Product() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const {
-    token,
-    setToken,
-    userId,
-    setUserId,
-    isLoggedIn,
-    setIsLoggedIn,
-    cart,
-    setCart,
-    userName,
-    setUserName,
-    userRole,
-    setUserRole,
-    userData,
-    setUserData,
-    products,
-    setProducts,
-    categories,
-    setCategories,
-    addToCart,
-    removeFromCart,
-  } = useContext(UserContext);
+  const { cart, setCart, addToCart, removeFromCart } = useContext(UserContext);
   const [productData, setProductData] = useState({});
   useEffect(() => {
     axios

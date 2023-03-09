@@ -1,7 +1,5 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 import axios from "axios";
-import validator from "validator";
-import jwt_decode from "jwt-decode";
 
 // create context
 const UserContext = createContext();

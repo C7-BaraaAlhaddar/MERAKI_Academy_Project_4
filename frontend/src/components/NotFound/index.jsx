@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 export default function NotFound() {
   return (

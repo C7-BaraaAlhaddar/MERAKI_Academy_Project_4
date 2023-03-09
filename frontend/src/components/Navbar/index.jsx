@@ -35,8 +35,6 @@ export default function NavbarMenu() {
     setUserRole,
     userData,
     setUserData,
-    products,
-    setProducts,
     categories,
     setCategories,
     addToCart,
@@ -82,16 +80,27 @@ export default function NavbarMenu() {
           <Navbar.Toggle className="my-2" aria-controls="nav-menu" />
           <Navbar.Collapse id="nav-menu">
             <Nav className="ms-auto">
-              <InputGroup className="mb-auto">
-                <Form.Control
-                  placeholder="Search"
-                  aria-label="Search"
-                  aria-describedby="basic-addon2"
-                />
-                <Button variant="outline-secondary" id="button-addon2">
-                  <BsSearch style={{ marginBottom: "2px" }} />
-                </Button>
-              </InputGroup>
+              <Form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  navigate(`/search/${e.target[0].value}`);
+                }}
+              >
+                <InputGroup className="mb-auto">
+                  <Form.Control
+                    placeholder="Search"
+                    aria-label="Search"
+                    aria-describedby="basic-addon2"
+                  />
+                  <Button
+                    type="submit"
+                    variant="outline-secondary"
+                    id="button-addon2"
+                  >
+                    <BsSearch style={{ marginBottom: "2px" }} />
+                  </Button>
+                </InputGroup>
+              </Form>
               <NavDropdown
                 title={isLoggedIn ? `${userName}` : "Account"}
                 id="basic-nav-dropdown"
