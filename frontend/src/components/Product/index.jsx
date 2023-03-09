@@ -28,6 +28,8 @@ export default function Product() {
     setProducts,
     categories,
     setCategories,
+    addToCart,
+    removeFromCart,
   } = useContext(UserContext);
   const [productData, setProductData] = useState({});
   useEffect(() => {
@@ -79,7 +81,15 @@ export default function Product() {
               </ListGroup.Item>
             </ListGroup>
             <div>
-              <Button style={{ margin: "10px" }} variant="warning">
+              <Button
+                onClick={(e) => {
+                  if (cart.includes(productData)) {
+                    addToCart(productData._id);
+                  }
+                }}
+                style={{ margin: "10px" }}
+                variant="warning"
+              >
                 Add to Cart
               </Button>
             </div>

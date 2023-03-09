@@ -26,28 +26,37 @@ const UserContextProvider = ({ children }) => {
   );
   const addToCart = (id) => {
     if (isLoggedIn) {
-      return () => {
-        axios
-          .put(`http://localhost:5000/user/cart/${id}`)
-          .then((result) => {
-            setCart(result.data.cart);
-            localStorage.setItem("cart", JSON.stringify(result.data.cart));
-          })
-          .catch((error) => console.log(error.response.message.data));
-      };
+      axios
+        .put(
+          `http://localhost:5000/user/cart/${id}`,
+          {},
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
+        .then((result) => {
+          setCart(result.data.cart);
+          localStorage.setItem("cart", JSON.stringify(result.data.cart));
+          console.log(cart);
+        })
+        .catch((error) => console.log(error.response.message.data));
     }
   };
   const removeFromCart = (id) => {
     if (isLoggedIn) {
-      return () => {
-        axios
-          .put(`http://localhost:5000/user/cart2/${id}`)
-          .then((result) => {
-            setCart(result.data.cart);
-            localStorage.setItem("cart", JSON.stringify(result.data.cart));
-          })
-          .catch((error) => console.log(error.response.message.data));
-      };
+      axios
+        .put(
+          `http://localhost:5000/user/cart2/${id}`,
+          {},
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
+        .then((result) => {
+          setCart(result.data.cart);
+          localStorage.setItem("cart", JSON.stringify(result.data.cart));
+        })
+        .catch((error) => console.log(error.response.message.data));
     }
   };
 

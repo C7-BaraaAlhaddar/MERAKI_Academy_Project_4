@@ -26,6 +26,8 @@ export default function CategoryPage() {
     setProducts,
     categories,
     setCategories,
+    addToCart,
+    removeFromCart,
   } = useContext(UserContext);
   const [categoryProducts, setCategoryProducts] = useState([]);
   const [categoryName, setCategoryName] = useState("");
@@ -54,38 +56,37 @@ export default function CategoryPage() {
         <div className="products-box">
           {categoryProducts.map((product) => {
             return (
-              <>
-                <Card
-                  key={product._id}
-                  style={{ width: "18rem", margin: "10px auto" }}
-                >
-                  <Card.Img
-                    onClick={() => {
-                      navigate(`/product/${product._id}`);
+              <Card
+                key={product._id}
+                style={{ width: "18rem", margin: "10px auto" }}
+              >
+                <Card.Img
+                  onClick={() => {
+                    navigate(`/product/${product._id}`);
+                  }}
+                  style={{ height: "18rem", cursor: "pointer" }}
+                  variant="top"
+                  src={product.img}
+                />
+                <Card.Body>
+                  <Card.Title style={{ fontSize: "15px" }}>
+                    {product.label}
+                  </Card.Title>
+                  <Card.Text style={{ fontSize: "15px" }}>
+                    {product.price} JD
+                  </Card.Text>
+                  <Button
+                    onClick={(e) => {
+                      if (!cart.includes(product)) {
+                        addToCart(product._id);
+                      }
                     }}
-                    style={{ height: "18rem", cursor: "pointer" }}
-                    variant="top"
-                    src={product.img}
-                  />
-                  <Card.Body>
-                    <Card.Title style={{ fontSize: "15px" }}>
-                      {product.label}
-                    </Card.Title>
-                    <Card.Text style={{ fontSize: "15px" }}>
-                      {product.price} JD
-                    </Card.Text>
-                    <Button
-                      onClick={(e) => {
-                        if (!isLoggedIn) {
-                        }
-                      }}
-                      variant="warning"
-                    >
-                      Add to cart
-                    </Button>
-                  </Card.Body>
-                </Card>
-              </>
+                    variant="warning"
+                  >
+                    Add to cart
+                  </Button>
+                </Card.Body>
+              </Card>
             );
           })}
         </div>

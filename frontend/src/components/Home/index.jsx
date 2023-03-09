@@ -27,6 +27,8 @@ export default function Home() {
     setProducts,
     categories,
     setCategories,
+    addToCart,
+    removeFromCart,
   } = useContext(UserContext);
 
   useEffect(() => {
@@ -96,7 +98,8 @@ export default function Home() {
                       </Card.Text>
                       <Button
                         onClick={(e) => {
-                          if (!isLoggedIn) {
+                          if (!cart.includes(product)) {
+                            addToCart(product._id);
                           }
                         }}
                         variant="warning"

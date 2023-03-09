@@ -25,6 +25,8 @@ export default function ProductsPage() {
     setProducts,
     categories,
     setCategories,
+    addToCart,
+    removeFromCart,
   } = useContext(UserContext);
 
   return (
@@ -41,38 +43,37 @@ export default function ProductsPage() {
         <div className="products-box">
           {products.map((product) => {
             return (
-              <>
-                <Card
-                  key={product._id}
-                  style={{ width: "18rem", margin: "10px auto" }}
-                >
-                  <Card.Img
-                    onClick={() => {
-                      navigate(`/product/${product._id}`);
+              <Card
+                key={product._id}
+                style={{ width: "18rem", margin: "10px auto" }}
+              >
+                <Card.Img
+                  onClick={() => {
+                    navigate(`/product/${product._id}`);
+                  }}
+                  style={{ height: "18rem", cursor: "pointer" }}
+                  variant="top"
+                  src={product.img}
+                />
+                <Card.Body>
+                  <Card.Title style={{ fontSize: "15px" }}>
+                    {product.label}
+                  </Card.Title>
+                  <Card.Text style={{ fontSize: "15px" }}>
+                    {product.price} JD
+                  </Card.Text>
+                  <Button
+                    onClick={(e) => {
+                      if (!isLoggedIn) {
+                        addToCart(product._id);
+                      }
                     }}
-                    style={{ height: "18rem", cursor: "pointer" }}
-                    variant="top"
-                    src={product.img}
-                  />
-                  <Card.Body>
-                    <Card.Title style={{ fontSize: "15px" }}>
-                      {product.label}
-                    </Card.Title>
-                    <Card.Text style={{ fontSize: "15px" }}>
-                      {product.price} JD
-                    </Card.Text>
-                    <Button
-                      onClick={(e) => {
-                        if (!isLoggedIn) {
-                        }
-                      }}
-                      variant="warning"
-                    >
-                      Add to cart
-                    </Button>
-                  </Card.Body>
-                </Card>
-              </>
+                    variant="warning"
+                  >
+                    Add to cart
+                  </Button>
+                </Card.Body>
+              </Card>
             );
           })}
         </div>

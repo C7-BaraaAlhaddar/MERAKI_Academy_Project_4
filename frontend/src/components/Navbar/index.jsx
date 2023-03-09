@@ -35,10 +35,12 @@ export default function NavbarMenu() {
     setUserRole,
     userData,
     setUserData,
-    Products,
+    products,
     setProducts,
     categories,
     setCategories,
+    addToCart,
+    removeFromCart,
   } = useContext(UserContext);
 
   const logOutFunc = () => {
