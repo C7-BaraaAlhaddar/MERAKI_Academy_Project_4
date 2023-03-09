@@ -7,6 +7,7 @@ const {
   updateProductById,
   getProductsByCategory,
   deleteProductById,
+  searchProducts,
 } = require("../controllers/product");
 
 const { createNewReview } = require("../controllers/review");
@@ -19,6 +20,8 @@ const productRouter = express.Router();
 //
 productRouter.get("/", getAllProducts);
 productRouter.get("/:id", getProductById);
+productRouter.get("/search/:name", searchProducts);
+
 productRouter.put("/review/:id", authentication, createNewReview);
 
 productRouter.get("/category/:id", getProductsByCategory);

@@ -98,6 +98,31 @@ const getProductById = (req, res) => {
 };
 
 // searchProducts
+const searchProducts = (req, res) => {
+  const name = req.params.name;
+  productModel
+    .find({ label: { $regex: `${name}`, $options: "i" } })
+    .then((products) => {
+      if (!products.length) {
+        return res.status(404).json({
+          success: false,
+          message: `no results`,
+        });
+      }
+      res.status(200).json({
+        success: true,
+        message: `Search results for: ${name}`,
+        products: products,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
 
 // update a product by id
 const updateProductById = (req, res) => {
@@ -198,4 +223,5 @@ module.exports = {
   updateProductById,
   getProductsByCategory,
   deleteProductById,
+  searchProducts,
 };
