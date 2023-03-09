@@ -2,7 +2,6 @@ import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import validator from "validator";
 import jwt_decode from "jwt-decode";
-import { Button, Modal } from "react-bootstrap";
 
 // create context
 const UserContext = createContext();

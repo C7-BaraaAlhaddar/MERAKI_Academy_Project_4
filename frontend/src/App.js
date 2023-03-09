@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import UserProfile from "./components/UserProfile";
 import Product from "./components/Product";
 import NotFound from "./components/NotFound";
+import ProductsPage from "./components/ProductsPage";
 function App() {
   return (
     <>
@@ -34,6 +35,16 @@ function App() {
             </>
           }
         />
+        <Route
+          path="/products"
+          element={
+            <>
+              <ProductsPage />
+              <Footer />
+            </>
+          }
+        />
+
         {/* Handling Undefined Routes */}
         <Route
           path="*"
