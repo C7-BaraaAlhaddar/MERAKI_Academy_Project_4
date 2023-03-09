@@ -9,12 +9,21 @@ export default function ProductsPage() {
   const { cart, setCart, products, setProducts, addToCart, removeFromCart } =
     useContext(UserContext);
   const [page, setPage] = useState(0);
+  const [lastPage, setLastPage] = useState(0);
   useEffect(() => {
     axios
       .get(`http://localhost:5000/product?from=${page}`)
       .then((result) => {
-        setProducts(result.data.products);
-        localStorage.setItem("products", JSON.stringify(result.data.products));
+        // console.log(result.data.length);
+        if (result.data.products) {
+          setProducts(result.data.products);
+          localStorage.setItem(
+            "products",
+            JSON.stringify(result.data.products)
+          );
+        } else {
+          setPage(lastPage);
+        }
       })
       .catch((error) => console.log(error.response.data.message));
   }, [page]);
@@ -71,6 +80,7 @@ export default function ProductsPage() {
           <Pagination.Prev
             onClick={(e) => {
               if (page > 0) {
+                setLastPage(page);
                 setPage(page - 8);
               }
             }}
@@ -78,9 +88,8 @@ export default function ProductsPage() {
 
           <Pagination.Next
             onClick={(e) => {
-              if (products.length === 8) {
-                setPage(page + 8);
-              }
+              setLastPage(page);
+              setPage(page + 8);
             }}
           />
         </Pagination>

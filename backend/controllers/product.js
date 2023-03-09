@@ -50,6 +50,7 @@ const getAllProducts = (req, res) => {
           success: true,
           message: `All the products`,
           products: products,
+          length: products.length,
         });
       } else {
         res.status(200).json({
@@ -132,8 +133,12 @@ const updateProductById = (req, res) => {
 // getProductsByCategory
 const getProductsByCategory = (req, res) => {
   let category = req.params.id;
+  let from = req.query.from;
+
   productModel
     .find({ category })
+    .skip(from ?? 0)
+    .limit(8)
     .populate("category")
     .populate("reviews")
     .exec()
