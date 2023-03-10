@@ -83,7 +83,9 @@ export default function NavbarMenu() {
               <Form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  navigate(`/search/${e.target[0].value}`);
+                  if (e.target[0].value !== "") {
+                    navigate(`/search/${e.target[0].value}`);
+                  }
                 }}
               >
                 <InputGroup className="mb-auto">
@@ -112,7 +114,13 @@ export default function NavbarMenu() {
                       Account
                     </NavDropdown.Item>
                     {userRole === "admin" && (
-                      <NavDropdown.Item>Admin Dashboard</NavDropdown.Item>
+                      <NavDropdown.Item
+                        onClick={(e) => {
+                          navigate("/dashboard");
+                        }}
+                      >
+                        Admin Dashboard
+                      </NavDropdown.Item>
                     )}
                     <NavDropdown.Divider />
                     <NavDropdown.Item onClick={logOutFunc}>

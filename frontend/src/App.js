@@ -13,6 +13,7 @@ import ProductsPage from "./components/ProductsPage";
 import CategoryPage from "./components/CategoryPage";
 import Cart from "./components/Cart";
 import SearchPage from "./components/SearchPage";
+import Dashboard from "./components/Dashboard";
 function App() {
   return (
     <>
@@ -52,6 +53,15 @@ function App() {
           element={
             <>
               <SearchPage />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <>
+              <Dashboard />
               <Footer />
             </>
           }

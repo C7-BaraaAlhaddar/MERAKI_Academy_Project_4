@@ -1,10 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../UserContext";
-import { Container, Card, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Container, Card, Button, Modal } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import axios from "axios";
 
 export default function Cart() {
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const navigate = useNavigate();
   const {
     token,
     setToken,
@@ -31,6 +38,7 @@ export default function Cart() {
   let total = cart.reduce((acc, e, i) => {
     return acc + e.price;
   }, 0);
+  console.log(total);
   return (
     <>
       <Container>
@@ -90,7 +98,32 @@ export default function Cart() {
                   <Card.Title>
                     <strong>Total : {total} JD</strong>{" "}
                   </Card.Title>
-                  <Button variant="warning">Place order</Button>
+                  <Button
+                    onClick={(e) => {
+                      axios
+                        .post(
+                          `http://localhost:5000/order`,
+                          {
+                            user: userId,
+                            orders: cart.map((e) => e._id),
+                            total: total,
+                            paymentMethod: "cash",
+                            shipping: false,
+                            successfulPayment: false,
+                          },
+                          { headers: { Authorization: `Bearer ${token}` } }
+                        )
+                        .then(() => {
+                          handleShow();
+                        })
+                        .catch((error) =>
+                          console.log(error.response.data.message)
+                        );
+                    }}
+                    variant="warning"
+                  >
+                    Place order
+                  </Button>
                 </div>
               </Card>
             </>
@@ -107,6 +140,26 @@ export default function Cart() {
             </>
           )}
         </div>
+        <>
+          <Modal backdrop="static" show={show} onHide={handleClose}>
+            <Modal.Header>
+              <Modal.Title>B store</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Order sent successfully</Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="secondary"
+                onClick={(e) => {
+                  handleClose();
+                  setCart([]);
+                  navigate("/");
+                }}
+              >
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </>
       </Container>
     </>
   );

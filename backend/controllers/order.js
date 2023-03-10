@@ -1,4 +1,5 @@
 const orderModel = require("../models/order");
+const userModel = require("../models/user");
 
 // create an order
 const createOrder = (req, res) => {
@@ -17,11 +18,22 @@ const createOrder = (req, res) => {
   newOrder
     .save()
     .then((order) => {
-      res.status(201).json({
-        success: true,
-        message: `order created`,
-        order: order,
-      });
+      userModel
+        .findByIdAndUpdate({ _id: user }, { cart: [] })
+        .then(() => {
+          res.status(201).json({
+            success: true,
+            message: `order created`,
+            order: order,
+          });
+        })
+        .catch((err) => {
+          res.status(500).json({
+            success: false,
+            message: `Server Error`,
+            err: err.message,
+          });
+        });
     })
     .catch((err) => {
       res.status(500).json({
