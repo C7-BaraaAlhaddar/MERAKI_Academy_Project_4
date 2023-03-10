@@ -74,6 +74,7 @@ const getProductById = (req, res) => {
   productModel
     .findById(id)
     .populate("category")
+    .populate("reviews")
     .exec()
     .then((product) => {
       if (!product) {

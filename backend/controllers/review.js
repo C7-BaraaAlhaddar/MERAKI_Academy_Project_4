@@ -19,11 +19,12 @@ const createNewReview = (req, res) => {
           { $push: { reviews: result._id } },
           { new: true }
         )
-        .then(() => {
+        .then((product) => {
           res.status(201).json({
             success: true,
             message: `Review added`,
-            review: result,
+            comment: result,
+            product: product,
           });
         })
         .catch((err) => {

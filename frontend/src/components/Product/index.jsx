@@ -1,21 +1,39 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Container, Card, Button, ListGroup, Table } from "react-bootstrap";
+import {
+  Container,
+  Card,
+  Button,
+  ListGroup,
+  Form,
+  FloatingLabel,
+  Badge,
+} from "react-bootstrap";
 import { UserContext } from "../UserContext";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
-import Hero from "../Hero";
-import About from "../About";
+import { useParams } from "react-router-dom";
+import { Rating, Typography } from "@mui/material";
 
 export default function Product() {
-  const navigate = useNavigate();
+  const [reviews, setReviews] = useState([]);
+  const [value, setValue] = useState(1);
   const { id } = useParams();
-  const { cart, setCart, addToCart, removeFromCart } = useContext(UserContext);
+  const {
+    cart,
+    setCart,
+    addToCart,
+    removeFromCart,
+    isLoggedIn,
+    userId,
+    setUserId,
+    token,
+  } = useContext(UserContext);
   const [productData, setProductData] = useState({});
   useEffect(() => {
     axios
       .get(`http://localhost:5000/product/${id}`)
       .then((result) => {
         setProductData(result.data.product);
+        setReviews(result.data.product.reviews);
       })
       .catch((error) => console.log(error.response.data.message));
   }, []);
@@ -136,6 +154,115 @@ export default function Product() {
             )}
           </div>
         </div>
+        <div style={{ margin: "10px", padding: "10px" }}>
+          {isLoggedIn ? (
+            <div>
+              <Card>
+                {" "}
+                <Card.Header>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <h5>
+                      <strong>Write a review :</strong>
+                    </h5>{" "}
+                    <div style={{ display: "flex" }}>
+                      {" "}
+                      <h5>
+                        {" "}
+                        <Badge bg="secondary">
+                          <strong style={{}}>Rate </strong>
+                        </Badge>
+                      </h5>
+                      <Rating
+                        name="simple-controlled"
+                        value={value}
+                        onChange={(event, newValue) => {
+                          setValue(newValue);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </Card.Header>
+                <Card.Body>
+                  <Form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      axios
+                        .put(
+                          `http://localhost:5000/product/review/${id}`,
+                          {
+                            rate: value,
+                            comment: e.target[0].value,
+                            user: userId,
+                          },
+                          { headers: { Authorization: `Bearer ${token}` } }
+                        )
+                        .then((result) => {
+                          setReviews([...reviews, result.data.comment]);
+                        })
+                        .catch((error) =>
+                          console.log(error.response.data.message)
+                        );
+                    }}
+                  >
+                    {" "}
+                    <FloatingLabel controlId="floatingTextarea2" label="Review">
+                      <Form.Control
+                        as="textarea"
+                        placeholder="Leave a comment here"
+                        style={{ height: "100px" }}
+                      />
+                    </FloatingLabel>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row-reverse",
+                        margin: "10px 0 0 0",
+                      }}
+                    >
+                      <Button variant="warning" type="submit">
+                        Submit review
+                      </Button>
+                    </div>
+                  </Form>
+                </Card.Body>
+              </Card>
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+        {reviews.length > 0 ? (
+          <>
+            <div style={{ margin: "5px" }}>
+              <h4
+                className="title-name"
+                style={{ fontWeight: "lighter", marginTop: "15px" }}
+              >
+                <span>Reviews</span>
+              </h4>
+            </div>
+            <div>
+              {reviews.map((review) => {
+                return (
+                  <Card style={{ margin: "10px" }} key={review._id}>
+                    <Card.Header>
+                      <Rating name="read-only" value={review.rate} readOnly />
+                    </Card.Header>
+                    <Card.Body>{review.comment}</Card.Body>
+                  </Card>
+                );
+              })}
+            </div>{" "}
+          </>
+        ) : (
+          <></>
+        )}
       </Container>
     </>
   );
