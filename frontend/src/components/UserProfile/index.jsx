@@ -9,7 +9,7 @@ import {
   Alert,
   Card,
   Stack,
-  Navbar,
+  Modal,
   Collapse,
   Col,
   Row,
@@ -34,8 +34,12 @@ export default function UserProfile() {
     userData,
     setUserData,
   } = useContext(UserContext);
+  const [show, setShow] = useState(false);
   const [updateError, setUpdateError] = useState(null);
   const [editProfile, setEditProfile] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const updateUserFunc = (e) => {
     e.preventDefault();
     if (
@@ -67,8 +71,9 @@ export default function UserProfile() {
       )
       .then((result) => {
         console.log(result.data.user);
-        localStorage.setItem("userData", result.data.user);
+        localStorage.setItem("userData", JSON.stringify(result.data.user));
         setUserData(result.data.user);
+        setUserName(result.data.user.firstName);
         setEditProfile(!editProfile);
         setUpdateError(null);
       })
@@ -78,18 +83,10 @@ export default function UserProfile() {
     <Container>
       {" "}
       <Card>
+        <Card.Header>
+          <strong>{`${userData.firstName} ${userData.lastName}`}</strong>
+        </Card.Header>
         <Card.Body>
-          <Navbar
-            style={{ marginBottom: "10px", borderRadius: "0.375rem" }}
-            bg="warning"
-          >
-            <Container>
-              <Navbar.Brand
-                style={{ fontWeight: "bold" }}
-              >{`${userData.firstName} ${userData.lastName}`}</Navbar.Brand>
-            </Container>
-          </Navbar>
-
           <div className="profile">
             <div className="profile-headers">
               {" "}
@@ -140,6 +137,13 @@ export default function UserProfile() {
               variant="warning"
             >
               Edit profile
+            </Button>
+            <Button
+              onClick={handleShow}
+              variant="danger"
+              style={{ marginRight: "10px" }}
+            >
+              Delete Account
             </Button>
           </div>
           <Collapse in={editProfile}>
@@ -214,6 +218,38 @@ export default function UserProfile() {
           </Collapse>
         </Card.Body>
       </Card>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Account settings</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete your account ?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button
+            variant="danger"
+            onClick={(e) => {
+              axios
+                .delete(`http://localhost:5000/user/${userId}`, {
+                  headers: { Authorization: `Bearer ${token}` },
+                })
+                .then(() => {
+                  setIsLoggedIn(false);
+                  setUserId(null);
+                  setToken(null);
+                  setUserName(null);
+                  setUserRole(null);
+                  localStorage.clear();
+                  navigate("/");
+                })
+                .catch((error) => console.log(error.response.data.message));
+            }}
+          >
+            Delete Account
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 }

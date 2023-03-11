@@ -1,7 +1,7 @@
 const userModel = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const role = require("../models/role");
+const roleModel = require("../models/role");
 
 // register function
 const register = (req, res) => {
@@ -106,9 +106,12 @@ const login = (req, res) => {
 };
 
 // update a user by id
-const updateUserById = (req, res) => {
+const updateUserById = async (req, res) => {
   const _id = req.params.id;
   const filter = req.body;
+  if (filter.password) {
+    filter.password = await bcrypt.hash(filter.password, 5);
+  }
   Object.keys(filter).forEach((key) => {
     filter[key] == "" && delete filter[key];
   });
