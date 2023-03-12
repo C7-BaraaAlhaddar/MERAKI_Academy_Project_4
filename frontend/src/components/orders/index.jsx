@@ -25,7 +25,9 @@ export default function Orders() {
             return (
               <Card key={order._id} style={{ marginBottom: "10px" }}>
                 <Card.Header>
-                  <Card.Text>{`Order #${i + 1}`}</Card.Text>
+                  <Card.Text>
+                    <strong>{`Order #${i + 1}`}</strong>{" "}
+                  </Card.Text>
                 </Card.Header>
                 <Card.Body>
                   <ListGroup>
@@ -66,36 +68,43 @@ export default function Orders() {
                       {order.shipping ? "Yes" : "Not Yet"}{" "}
                     </ListGroup.Item>
                   </ListGroup>
-                  <Button
-                    onClick={(e) => {
-                      axios
-                        .put(
-                          `http://localhost:5000/order/${order._id}`,
-                          {
-                            shipping: true,
-                            successfulPayment: true,
-                          },
-                          { headers: { Authorization: `Bearer ${token}` } }
-                        )
-                        .then((result) => {
-                          setOrders(
-                            orders.map((e) => {
-                              if (e._id === order.id) {
-                                return result.data.order;
-                              } else {
-                                return e;
-                              }
+                  {order.shipping ? (
+                    <></>
+                  ) : (
+                    <>
+                      {" "}
+                      <Button
+                        onClick={(e) => {
+                          axios
+                            .put(
+                              `http://localhost:5000/order/${order._id}`,
+                              {
+                                shipping: true,
+                                successfulPayment: true,
+                              },
+                              { headers: { Authorization: `Bearer ${token}` } }
+                            )
+                            .then((result) => {
+                              setOrders(
+                                orders.map((e) => {
+                                  if (e._id === order._id) {
+                                    e = result.data.order;
+                                  }
+                                  return e;
+                                })
+                              );
                             })
-                          );
-                        })
-                        .catch((error) =>
-                          console.log(error.response.data.message)
-                        );
-                    }}
-                    style={{ marginTop: "10px" }}
-                  >
-                    Mark as delivered
-                  </Button>
+                            .catch((error) =>
+                              console.log(error.response.data.message)
+                            );
+                        }}
+                        style={{ marginTop: "10px" }}
+                      >
+                        Mark as delivered
+                      </Button>
+                    </>
+                  )}
+
                   <Button
                     onClick={(e) => {
                       axios
@@ -105,7 +114,7 @@ export default function Orders() {
                         .then((result) => {
                           setOrders(
                             orders.filter((e) => {
-                              return e.id !== order.id;
+                              return e._id !== order._id;
                             })
                           );
                         })

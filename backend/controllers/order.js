@@ -169,6 +169,9 @@ const updateOrderById = (req, res) => {
   });
   orderModel
     .findByIdAndUpdate({ _id }, req.body, { new: true })
+    .populate("user")
+    .populate("orders")
+    .exec()
     .then((updatedOrder) => {
       if (!updatedOrder) {
         return res.status(404).json({
