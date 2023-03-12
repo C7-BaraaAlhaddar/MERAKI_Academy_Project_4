@@ -35,7 +35,7 @@ export default function CreateProduct() {
             {" "}
             <Dropdown>
               <Dropdown.Toggle variant="warning" id="dropdown-basic">
-                Category
+                {pickedCategory ? pickedCategory.categoryName : "Category"}
               </Dropdown.Toggle>
 
               <Dropdown.Menu>

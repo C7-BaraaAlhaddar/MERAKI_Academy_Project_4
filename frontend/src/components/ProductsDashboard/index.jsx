@@ -90,7 +90,7 @@ export default function ProductsDashboard() {
                           );
                       }}
                     >
-                      Delete User
+                      Delete Product
                     </Button>
                   </Modal.Footer>
                 </Modal>
