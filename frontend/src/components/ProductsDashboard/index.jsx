@@ -81,7 +81,7 @@ export default function ProductsDashboard() {
                           )
                           .then((result) => {
                             setProducts(
-                              product.filter((e) => e._id !== product._id)
+                              products.filter((e) => e._id !== product._id)
                             );
                             handleClose();
                           })

@@ -1,11 +1,13 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
-import { Button, Form, Card, Dropdown } from "react-bootstrap";
+import { Button, Form, Card, Dropdown, Alert } from "react-bootstrap";
 
 export default function CreateProduct() {
-  const { categories } = useContext(UserContext);
+  const navigate = useNavigate();
+  const [errorMsg, setErrorMsg] = useState(null);
+  const { categories, token } = useContext(UserContext);
   const [pickedCategory, setPickedCategory] = useState(null);
   const [url, setUrl] = useState("");
   const [image, setImage] = useState("");
@@ -40,8 +42,9 @@ export default function CreateProduct() {
                 {categories.map((category) => {
                   return (
                     <Dropdown.Item
+                      key={category._id}
                       onClick={(e) => {
-                        setPickedCategory(category.categoryName);
+                        setPickedCategory(category);
                       }}
                     >
                       {category.categoryName}
@@ -53,9 +56,119 @@ export default function CreateProduct() {
           </div>
 
           <Form
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault();
-              console.log(e.target[0]);
+              await uploadImage();
+              if (!pickedCategory) {
+                return setErrorMsg("Please choose a Category");
+              }
+              if (
+                e.target[0].value == "" ||
+                e.target[1].value == "" ||
+                e.target[2].value == ""
+              ) {
+                return setErrorMsg("All fields are required");
+              }
+              if (
+                pickedCategory.categoryName === "Mobiles" ||
+                pickedCategory.categoryName === "Tablets"
+              ) {
+                axios
+                  .post(
+                    `http://localhost:5000/product`,
+                    {
+                      label: e.target[0].value,
+                      brand: e.target[1].value,
+                      price: e.target[2].value,
+                      img: url,
+                      category: pickedCategory._id,
+                      specs: {
+                        cpu: e.target[3].value,
+                        ram: e.target[4].value,
+                        battery: e.target[5].value,
+                        memory: e.target[6].value,
+                        frontCamera: e.target[7].value,
+                        backCamera: e.target[8].value,
+                        display: e.target[9].value,
+                      },
+                    },
+                    {
+                      headers: { Authorization: `Bearer ${token}` },
+                    }
+                  )
+                  .then((result) => {
+                    e.target[0].value = "";
+                    e.target[1].value = "";
+                    e.target[2].value = "";
+                    e.target[3].value = "";
+                    e.target[4].value = "";
+                    e.target[5].value = "";
+                    e.target[6].value = "";
+                    e.target[7].value = "";
+                    e.target[8].value = "";
+                    e.target[9].value = "";
+                    setErrorMsg(null);
+                    navigate("/dashboard/products");
+                  })
+                  .catch((error) => setErrorMsg(error.response.data.message));
+              } else if (pickedCategory.categoryName === "Laptops") {
+                axios
+                  .post(
+                    `http://localhost:5000/product`,
+                    {
+                      label: e.target[0].value,
+                      brand: e.target[1].value,
+                      price: e.target[2].value,
+                      img: url,
+                      category: pickedCategory._id,
+                      specs: {
+                        cpu: e.target[3].value,
+                        ram: e.target[4].value,
+                        gpu: e.target[5].value,
+                        monitor: e.target[6].value,
+                      },
+                    },
+                    {
+                      headers: { Authorization: `Bearer ${token}` },
+                    }
+                  )
+                  .then((result) => {
+                    e.target[0].value = "";
+                    e.target[1].value = "";
+                    e.target[2].value = "";
+                    e.target[3].value = "";
+                    e.target[4].value = "";
+                    e.target[5].value = "";
+                    e.target[6].value = "";
+
+                    setErrorMsg(null);
+                    navigate("/dashboard/products");
+                  })
+                  .catch((error) => setErrorMsg(error.response.data.message));
+              } else {
+                axios
+                  .post(
+                    `http://localhost:5000/product`,
+                    {
+                      label: e.target[0].value,
+                      brand: e.target[1].value,
+                      price: e.target[2].value,
+                      img: url,
+                      category: pickedCategory._id,
+                    },
+                    {
+                      headers: { Authorization: `Bearer ${token}` },
+                    }
+                  )
+                  .then((result) => {
+                    e.target[0].value = "";
+                    e.target[1].value = "";
+                    e.target[2].value = "";
+                    setErrorMsg(null);
+                    navigate("/dashboard/products");
+                  })
+                  .catch((error) => setErrorMsg(error.response.data.message));
+              }
             }}
           >
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -72,8 +185,8 @@ export default function CreateProduct() {
             </Form.Group>
             {pickedCategory ? (
               <>
-                {pickedCategory === "Mobiles" ||
-                pickedCategory === "Tablets" ? (
+                {pickedCategory.categoryName === "Mobiles" ||
+                pickedCategory.categoryName === "Tablets" ? (
                   <>
                     <Form.Group
                       className="mb-3"
@@ -138,7 +251,7 @@ export default function CreateProduct() {
                   <></>
                 )}
 
-                {pickedCategory === "Laptops" && (
+                {pickedCategory.categoryName === "Laptops" && (
                   <>
                     <Form.Group
                       className="mb-3"
@@ -180,16 +293,20 @@ export default function CreateProduct() {
               <Form.Control
                 onChange={(e) => {
                   setImage(e.target.files[0]);
-                  uploadImage();
                 }}
                 type="file"
               />
             </Form.Group>
 
             <Button variant="warning" type="submit">
-              submit
+              Create product
             </Button>
           </Form>
+          {errorMsg && (
+            <Alert style={{ marginTop: "10px" }} variant="danger">
+              {errorMsg}
+            </Alert>
+          )}
         </Card.Body>
       </Card>
     </div>
