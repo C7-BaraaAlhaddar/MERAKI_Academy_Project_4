@@ -13,6 +13,8 @@ import { useNavigate, Route, Routes } from "react-router-dom";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { CloudinaryImage } from "@cloudinary/url-gen";
 import Orders from "../orders";
+import UsersDashboard from "../UsersDashboard";
+import ProductsDashboard from "../ProductsDashboard";
 
 export default function Dashboard() {
   const { userRole } = useContext(UserContext);
@@ -24,6 +26,14 @@ export default function Dashboard() {
   const navigate = useNavigate();
   return (
     <Container>
+      <div style={{ margin: "5px" }}>
+        <h4
+          className="title-name"
+          style={{ fontWeight: "lighter", marginTop: "15px" }}
+        >
+          <span>Admin Dashboard</span>
+        </h4>
+      </div>
       <div className="row">
         <div className="col-md-3" style={{ marginBottom: "10px" }}>
           <Card>
@@ -35,8 +45,16 @@ export default function Dashboard() {
                 >
                   Orders
                 </ListGroup.Item>
-                <ListGroup.Item className="list-filter">Users</ListGroup.Item>
-                <ListGroup.Item className="list-filter">
+                <ListGroup.Item
+                  onClick={(e) => navigate("/dashboard/users")}
+                  className="list-filter"
+                >
+                  Users
+                </ListGroup.Item>
+                <ListGroup.Item
+                  onClick={(e) => navigate("/dashboard/products")}
+                  className="list-filter"
+                >
                   Products
                 </ListGroup.Item>
                 <ListGroup.Item className="list-filter">
@@ -50,6 +68,8 @@ export default function Dashboard() {
           {" "}
           <Routes>
             <Route path="/" element={<Orders />} />
+            <Route path="/users" element={<UsersDashboard />} />
+            <Route path="/products" element={<ProductsDashboard />} />
           </Routes>
         </div>
       </div>

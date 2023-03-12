@@ -8,6 +8,7 @@ const {
   getProductsByCategory,
   deleteProductById,
   searchProducts,
+  adminGetAllProducts,
 } = require("../controllers/product");
 
 const { createNewReview } = require("../controllers/review");
@@ -18,7 +19,14 @@ const authorization = require("../middleware/authorization");
 //
 const productRouter = express.Router();
 //
-productRouter.get("/", getAllProducts);
+productRouter.get("/", adminGetAllProducts);
+productRouter.get(
+  "/admin",
+  authentication,
+  authorization("ADMIN"),
+  adminGetAllProducts
+);
+
 productRouter.get("/:id", getProductById);
 productRouter.get("/search/:name", searchProducts);
 

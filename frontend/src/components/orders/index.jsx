@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Card, Button, ListGroup } from "react-bootstrap";
 import { UserContext } from "../UserContext";
 import axios from "axios";
@@ -19,7 +18,7 @@ export default function Orders() {
   }, []);
   return (
     <div>
-      {orders.length > 0 ? (
+      {orders ? (
         <>
           {orders.map((order, i) => {
             return (

@@ -67,6 +67,36 @@ const getAllProducts = (req, res) => {
       });
     });
 };
+// admin get all products
+const adminGetAllProducts = (req, res) => {
+  productModel
+    .find()
+    .populate("category")
+    .populate("reviews")
+    .exec()
+    .then((products) => {
+      if (products.length) {
+        res.status(200).json({
+          success: true,
+          message: `All the products`,
+          products: products,
+          length: products.length,
+        });
+      } else {
+        res.status(200).json({
+          success: false,
+          message: `No products Yet`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
 
 // get product by id
 const getProductById = (req, res) => {
@@ -225,4 +255,5 @@ module.exports = {
   getProductsByCategory,
   deleteProductById,
   searchProducts,
+  adminGetAllProducts,
 };

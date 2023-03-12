@@ -14,6 +14,7 @@ import CategoryPage from "./components/CategoryPage";
 import Cart from "./components/Cart";
 import SearchPage from "./components/SearchPage";
 import Dashboard from "./components/Dashboard";
+
 function App() {
   return (
     <>
@@ -58,10 +59,11 @@ function App() {
           }
         />
         <Route
-          path="/dashboard"
+          path="/dashboard/*"
           element={
             <>
               <Dashboard />
+
               <Footer />
             </>
           }
