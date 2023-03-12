@@ -24,6 +24,7 @@ const UserContextProvider = ({ children }) => {
   const [categories, setCategories] = useState(
     JSON.parse(localStorage.getItem("categories")) ?? []
   );
+
   const addToCart = (id) => {
     if (isLoggedIn) {
       axios

@@ -1,20 +1,12 @@
 import React, { useEffect, useContext, useState } from "react";
-import {
-  Button,
-  Container,
-  Form,
-  InputGroup,
-  ListGroup,
-  Card,
-} from "react-bootstrap";
+import { Container, ListGroup, Card } from "react-bootstrap";
 import { UserContext } from "../UserContext";
 import axios from "axios";
 import { useNavigate, Route, Routes } from "react-router-dom";
-import { fill } from "@cloudinary/url-gen/actions/resize";
-import { CloudinaryImage } from "@cloudinary/url-gen";
 import Orders from "../orders";
 import UsersDashboard from "../UsersDashboard";
 import ProductsDashboard from "../ProductsDashboard";
+import CreateProduct from "../CreateProduct";
 
 export default function Dashboard() {
   const { userRole } = useContext(UserContext);
@@ -57,7 +49,10 @@ export default function Dashboard() {
                 >
                   Products
                 </ListGroup.Item>
-                <ListGroup.Item className="list-filter">
+                <ListGroup.Item
+                  onClick={(e) => navigate("/dashboard/createproduct")}
+                  className="list-filter"
+                >
                   Add a new Product
                 </ListGroup.Item>
               </ListGroup>
@@ -70,6 +65,7 @@ export default function Dashboard() {
             <Route path="/" element={<Orders />} />
             <Route path="/users" element={<UsersDashboard />} />
             <Route path="/products" element={<ProductsDashboard />} />
+            <Route path="/createproduct" element={<CreateProduct />} />
           </Routes>
         </div>
       </div>
