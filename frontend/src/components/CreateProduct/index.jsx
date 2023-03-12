@@ -6,6 +6,7 @@ import { Button, Form, Card, Dropdown } from "react-bootstrap";
 
 export default function CreateProduct() {
   const { categories } = useContext(UserContext);
+  const [pickedCategory, setPickedCategory] = useState(null);
   const [url, setUrl] = useState("");
   const [image, setImage] = useState("");
   const uploadImage = () => {
@@ -31,14 +32,22 @@ export default function CreateProduct() {
           <div style={{ display: "flex" }}>
             {" "}
             <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
+              <Dropdown.Toggle variant="warning" id="dropdown-basic">
                 Category
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                {categories.map((category) => {
+                  return (
+                    <Dropdown.Item
+                      onClick={(e) => {
+                        setPickedCategory(category.categoryName);
+                      }}
+                    >
+                      {category.categoryName}
+                    </Dropdown.Item>
+                  );
+                })}
               </Dropdown.Menu>
             </Dropdown>
           </div>
@@ -61,6 +70,111 @@ export default function CreateProduct() {
               <Form.Label>Product price</Form.Label>
               <Form.Control type="number" placeholder="price" />
             </Form.Group>
+            {pickedCategory ? (
+              <>
+                {pickedCategory === "Mobiles" ||
+                pickedCategory === "Tablets" ? (
+                  <>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput2"
+                    >
+                      <Form.Label>CPU</Form.Label>
+                      <Form.Control type="text" placeholder="Product cpu" />
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput2"
+                    >
+                      <Form.Label> RAM</Form.Label>
+                      <Form.Control type="text" placeholder="Product ram" />
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput2"
+                    >
+                      <Form.Label> Battery</Form.Label>
+                      <Form.Control type="text" placeholder="Product battery" />
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput2"
+                    >
+                      <Form.Label> Storage</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Product storage"
+                      />{" "}
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput2"
+                    >
+                      <Form.Label> Front Camera</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Product front camer"
+                      />
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput2"
+                    >
+                      <Form.Label> Rear Camera</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Product rear camera"
+                      />
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput2"
+                    >
+                      <Form.Label> Display</Form.Label>
+                      <Form.Control type="text" placeholder="Product Display" />
+                    </Form.Group>
+                  </>
+                ) : (
+                  <></>
+                )}
+
+                {pickedCategory === "Laptops" && (
+                  <>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput2"
+                    >
+                      <Form.Label>CPU</Form.Label>
+                      <Form.Control type="text" placeholder="Product cpu" />
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput2"
+                    >
+                      <Form.Label> RAM</Form.Label>
+                      <Form.Control type="text" placeholder="Product ram" />
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput2"
+                    >
+                      <Form.Label> GPU</Form.Label>
+                      <Form.Control type="text" placeholder="Product gpu" />
+                    </Form.Group>
+
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput2"
+                    >
+                      <Form.Label> Monitor</Form.Label>
+                      <Form.Control type="text" placeholder="Product Monitor" />
+                    </Form.Group>
+                  </>
+                )}
+              </>
+            ) : (
+              <></>
+            )}
             <Form.Group controlId="formFile" className="mb-3">
               <Form.Label>Upload Image</Form.Label>
               <Form.Control
@@ -72,7 +186,9 @@ export default function CreateProduct() {
               />
             </Form.Group>
 
-            <Button type="submit">submit</Button>
+            <Button variant="warning" type="submit">
+              submit
+            </Button>
           </Form>
         </Card.Body>
       </Card>

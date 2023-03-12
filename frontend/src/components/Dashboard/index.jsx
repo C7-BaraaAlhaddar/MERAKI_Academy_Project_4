@@ -35,25 +35,25 @@ export default function Dashboard() {
                   onClick={(e) => navigate("/dashboard")}
                   className="list-filter"
                 >
-                  Orders
+                  <strong>Orders</strong>
                 </ListGroup.Item>
                 <ListGroup.Item
                   onClick={(e) => navigate("/dashboard/users")}
                   className="list-filter"
                 >
-                  Users
+                  <strong>Users</strong>
                 </ListGroup.Item>
                 <ListGroup.Item
                   onClick={(e) => navigate("/dashboard/products")}
                   className="list-filter"
                 >
-                  Products
+                  <strong> Products</strong>
                 </ListGroup.Item>
                 <ListGroup.Item
                   onClick={(e) => navigate("/dashboard/createproduct")}
                   className="list-filter"
                 >
-                  Add a new Product
+                  <strong> Add a new Product</strong>
                 </ListGroup.Item>
               </ListGroup>
             </Card.Body>
