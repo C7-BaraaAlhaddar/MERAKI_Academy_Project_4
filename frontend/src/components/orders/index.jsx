@@ -66,10 +66,56 @@ export default function Orders() {
                       {order.shipping ? "Yes" : "Not Yet"}{" "}
                     </ListGroup.Item>
                   </ListGroup>
-                  <Button style={{ marginTop: "10px" }}>
+                  <Button
+                    onClick={(e) => {
+                      axios
+                        .put(
+                          `http://localhost:5000/order/${order._id}`,
+                          {
+                            shipping: true,
+                            successfulPayment: true,
+                          },
+                          { headers: { Authorization: `Bearer ${token}` } }
+                        )
+                        .then((result) => {
+                          setOrders(
+                            orders.map((e) => {
+                              if (e._id === order.id) {
+                                return result.data.order;
+                              } else {
+                                return e;
+                              }
+                            })
+                          );
+                        })
+                        .catch((error) =>
+                          console.log(error.response.data.message)
+                        );
+                    }}
+                    style={{ marginTop: "10px" }}
+                  >
                     Mark as delivered
                   </Button>
-                  <Button variant="danger" style={{ margin: "10px 0 0 10px" }}>
+                  <Button
+                    onClick={(e) => {
+                      axios
+                        .delete(`http://localhost:5000/order/${order._id}`, {
+                          headers: { Authorization: `Bearer ${token}` },
+                        })
+                        .then((result) => {
+                          setOrders(
+                            orders.filter((e) => {
+                              return e.id !== order.id;
+                            })
+                          );
+                        })
+                        .catch((error) =>
+                          console.log(error.response.data.message)
+                        );
+                    }}
+                    variant="danger"
+                    style={{ margin: "10px 0 0 10px" }}
+                  >
                     Delete order
                   </Button>
                 </Card.Body>

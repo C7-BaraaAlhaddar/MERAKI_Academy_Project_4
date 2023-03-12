@@ -6,6 +6,7 @@ const {
   getOrderById,
   getOrdersByUser,
   deleteOrderById,
+  updateOrderById,
 } = require("../controllers/order");
 
 const authentication = require("../middleware/authentication");
@@ -22,6 +23,13 @@ orderRouter.get(
   getOrdersByUser
 );
 orderRouter.post("/", authentication, createOrder);
+orderRouter.put(
+  "/:id",
+  authentication,
+  authorization("ADMIN"),
+  updateOrderById
+);
+
 orderRouter.delete(
   "/:id",
   authentication,

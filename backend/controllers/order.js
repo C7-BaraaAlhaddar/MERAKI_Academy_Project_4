@@ -161,10 +161,41 @@ const deleteOrderById = (req, res) => {
     });
 };
 
+const updateOrderById = (req, res) => {
+  const _id = req.params.id;
+  const filter = req.body;
+  Object.keys(filter).forEach((key) => {
+    filter[key] == "" && delete filter[key];
+  });
+  orderModel
+    .findByIdAndUpdate({ _id }, req.body, { new: true })
+    .then((updatedOrder) => {
+      if (!updatedOrder) {
+        return res.status(404).json({
+          success: false,
+          message: `The order with id => ${_id} not found`,
+        });
+      }
+      res.status(202).json({
+        success: true,
+        message: `product updated`,
+        order: updatedOrder,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
+
 module.exports = {
   createOrder,
   getAllOrders,
   getOrderById,
   getOrdersByUser,
   deleteOrderById,
+  updateOrderById,
 };
