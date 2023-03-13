@@ -5,6 +5,7 @@ import { Button, Container, Card, ListGroup } from "react-bootstrap";
 import { UserContext } from "../UserContext";
 import UserInfo from "../UserInfo";
 import UpdateUser from "../UserUpdate";
+import UserUpdatePassword from "../UserUpdatePassword";
 
 export default function UserProfile() {
   const navigate = useNavigate();
@@ -38,16 +39,16 @@ export default function UserProfile() {
                   onClick={(e) => navigate(`/profile/${id}`)}
                   className="list-filter"
                 >
-                  <strong>User Info</strong>
+                  <strong>User Information</strong>
                 </ListGroup.Item>
                 <ListGroup.Item
                   onClick={(e) => navigate(`/profile/${id}/update`)}
                   className="list-filter"
                 >
-                  <strong>Update Info</strong>
+                  <strong>Update Information</strong>
                 </ListGroup.Item>
                 <ListGroup.Item
-                  onClick={(e) => navigate("/dashboard/products")}
+                  onClick={(e) => navigate(`/profile/${id}/password`)}
                   className="list-filter"
                 >
                   <strong> Change Password</strong>
@@ -60,6 +61,7 @@ export default function UserProfile() {
           <Routes>
             <Route path="/" element={<UserInfo />} />
             <Route path="/update" element={<UpdateUser />} />
+            <Route path="/password" element={<UserUpdatePassword />} />
           </Routes>
         </div>
       </div>
