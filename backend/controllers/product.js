@@ -230,7 +230,7 @@ const deleteProductById = (req, res) => {
       if (!result) {
         return res.status(404).json({
           success: false,
-          message: `The product with id => ${id} not found`,
+          message: `The product with id => ${_id} not found`,
         });
       }
       res.status(200).json({

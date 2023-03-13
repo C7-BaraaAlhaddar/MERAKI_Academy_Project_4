@@ -35,7 +35,7 @@ productRouter.put(
   "/review2/:id",
   authentication,
   authorization("ADMIN"),
-  createNewReview
+  deleteReviewById
 );
 
 productRouter.get("/category/:id", getProductsByCategory);
