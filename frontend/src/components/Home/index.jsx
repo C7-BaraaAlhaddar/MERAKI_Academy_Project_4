@@ -127,16 +127,20 @@ export default function Home() {
               padding: "10px",
             }}
           >
-            <Link to={`https://twitter.com/baraaweeb`}>
+            <Link target={"_blank"} to={`https://twitter.com/baraaweeb`}>
               <BsTwitter size={30} />
             </Link>
             <Link
+              target={"_blank"}
               style={{ color: "black" }}
               to={`https://www.instagram.com/baraaweeb/`}
             >
               <BsInstagram size={30} />
             </Link>
-            <Link to={`https://web.facebook.com/baraa.alhaddar/`}>
+            <Link
+              target={"_blank"}
+              to={`https://web.facebook.com/baraa.alhaddar/`}
+            >
               {" "}
               <BsFacebook size={30} />
             </Link>
