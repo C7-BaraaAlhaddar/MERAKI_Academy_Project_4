@@ -26,6 +26,7 @@ export default function Product() {
     userId,
     setUserId,
     token,
+    userRole,
   } = useContext(UserContext);
   const [productData, setProductData] = useState({});
   useEffect(() => {
@@ -257,31 +258,36 @@ export default function Product() {
                     </Card.Header>
                     <Card.Body>{review.comment}</Card.Body>
                     <Card.Footer>
-                      <Button
-                        onClick={(e) => {
-                          axios
-                            .put(
-                              `http://localhost:5000/product/review2/${review._id}`,
-                              {
-                                _id: productData._id,
-                              },
-                              {
-                                headers: { Authorization: `Bearer ${token}` },
-                              }
-                            )
-                            .then((result) => {
-                              setReviews(
-                                reviews.filter((e) => e._id !== review._id)
-                              );
-                            })
-                            .catch((error) =>
-                              console.log(error.response.data.message)
-                            );
-                        }}
-                        variant="danger"
-                      >
-                        Delete review
-                      </Button>
+                      {userRole === "admin" ||
+                        (review.user === userId && (
+                          <Button
+                            onClick={(e) => {
+                              axios
+                                .put(
+                                  `http://localhost:5000/product/review2/${review._id}`,
+                                  {
+                                    _id: productData._id,
+                                  },
+                                  {
+                                    headers: {
+                                      Authorization: `Bearer ${token}`,
+                                    },
+                                  }
+                                )
+                                .then((result) => {
+                                  setReviews(
+                                    reviews.filter((e) => e._id !== review._id)
+                                  );
+                                })
+                                .catch((error) =>
+                                  console.log(error.response.data.message)
+                                );
+                            }}
+                            variant="danger"
+                          >
+                            Delete review
+                          </Button>
+                        ))}
                     </Card.Footer>
                   </Card>
                 );
