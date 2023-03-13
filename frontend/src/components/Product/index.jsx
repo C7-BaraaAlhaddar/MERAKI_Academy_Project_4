@@ -12,7 +12,7 @@ import { UserContext } from "../UserContext";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Rating, Typography } from "@mui/material";
-
+import { BsFillCartPlusFill } from "react-icons/bs";
 export default function Product() {
   const [reviews, setReviews] = useState([]);
   const [value, setValue] = useState(1);
@@ -88,7 +88,8 @@ export default function Product() {
                 style={{ margin: "10px" }}
                 variant="warning"
               >
-                Add to Cart
+                Add to Cart{" "}
+                <BsFillCartPlusFill style={{ marginBottom: "3px" }} />
               </Button>
             </div>
           </div>

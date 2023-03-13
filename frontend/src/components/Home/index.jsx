@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Hero from "../Hero";
 import About from "../About";
+import { BsFillCartPlusFill } from "react-icons/bs";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -99,7 +100,8 @@ export default function Home() {
                         }}
                         variant="warning"
                       >
-                        Add to cart
+                        Add to cart{" "}
+                        <BsFillCartPlusFill style={{ marginBottom: "3px" }} />
                       </Button>
                     </Card.Body>
                   </Card>

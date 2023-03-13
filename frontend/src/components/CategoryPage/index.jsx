@@ -3,7 +3,7 @@ import { Container, Card, Button, Pagination } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../UserContext";
-
+import { BsFillCartPlusFill } from "react-icons/bs";
 export default function CategoryPage() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -70,7 +70,8 @@ export default function CategoryPage() {
                     }}
                     variant="warning"
                   >
-                    Add to cart
+                    Add to cart{" "}
+                    <BsFillCartPlusFill style={{ marginBottom: "3px" }} />
                   </Button>
                 </Card.Body>
               </Card>

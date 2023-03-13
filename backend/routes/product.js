@@ -11,7 +11,7 @@ const {
   adminGetAllProducts,
 } = require("../controllers/product");
 
-const { createNewReview } = require("../controllers/review");
+const { createNewReview, deleteReviewById } = require("../controllers/review");
 
 const authentication = require("../middleware/authentication");
 const authorization = require("../middleware/authorization");
@@ -31,6 +31,12 @@ productRouter.get("/:id", getProductById);
 productRouter.get("/search/:name", searchProducts);
 
 productRouter.put("/review/:id", authentication, createNewReview);
+productRouter.put(
+  "/review2/:id",
+  authentication,
+  authorization("ADMIN"),
+  createNewReview
+);
 
 productRouter.get("/category/:id", getProductsByCategory);
 productRouter.put(

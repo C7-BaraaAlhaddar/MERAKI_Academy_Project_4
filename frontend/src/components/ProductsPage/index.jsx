@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import { Container, Card, Button, Pagination } from "react-bootstrap";
 import axios from "axios";
+import { BsFillCartPlusFill } from "react-icons/bs";
 
 export default function ProductsPage() {
   const navigate = useNavigate();
@@ -69,7 +70,8 @@ export default function ProductsPage() {
                     }}
                     variant="warning"
                   >
-                    Add to cart
+                    Add to cart{" "}
+                    <BsFillCartPlusFill style={{ marginBottom: "3px" }} />
                   </Button>
                 </Card.Body>
               </Card>
