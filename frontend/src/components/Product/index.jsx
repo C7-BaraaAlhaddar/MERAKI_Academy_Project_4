@@ -11,23 +11,14 @@ import {
 import { UserContext } from "../UserContext";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { Rating, Typography } from "@mui/material";
+import { Rating } from "@mui/material";
 import { BsFillCartPlusFill } from "react-icons/bs";
 export default function Product() {
   const [reviews, setReviews] = useState([]);
   const [value, setValue] = useState(1);
   const { id } = useParams();
-  const {
-    cart,
-    setCart,
-    addToCart,
-    removeFromCart,
-    isLoggedIn,
-    userId,
-    setUserId,
-    token,
-    userRole,
-  } = useContext(UserContext);
+  const { cart, addToCart, isLoggedIn, userId, token, userRole } =
+    useContext(UserContext);
   const [productData, setProductData] = useState({});
   useEffect(() => {
     axios

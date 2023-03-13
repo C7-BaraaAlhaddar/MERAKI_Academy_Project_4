@@ -1,30 +1,14 @@
-import React, { useState, useContext, useEffect } from "react";
+import React from "react";
 
 import { useNavigate, Route, Routes, useParams } from "react-router-dom";
-import { Button, Container, Card, ListGroup } from "react-bootstrap";
-import { UserContext } from "../UserContext";
+import { Container, Card, ListGroup } from "react-bootstrap";
 import UserInfo from "../UserInfo";
 import UpdateUser from "../UserUpdate";
 import UserUpdatePassword from "../UserUpdatePassword";
 
 export default function UserProfile() {
   const navigate = useNavigate();
-  const {
-    token,
-    setToken,
-    userId,
-    setUserId,
-    isLoggedIn,
-    setIsLoggedIn,
-    cart,
-    setCart,
-    userName,
-    setUserName,
-    userRole,
-    setUserRole,
-    userData,
-    setUserData,
-  } = useContext(UserContext);
+
   const { id } = useParams();
 
   return (

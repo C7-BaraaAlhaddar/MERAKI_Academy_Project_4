@@ -7,7 +7,7 @@ import axios from "axios";
 export default function SearchPage() {
   const { name } = useParams();
   const navigate = useNavigate();
-  const { cart, setCart, addToCart, removeFromCart } = useContext(UserContext);
+  const { cart, addToCart } = useContext(UserContext);
   const [searchResult, setSearchResult] = useState([]);
 
   useEffect(() => {

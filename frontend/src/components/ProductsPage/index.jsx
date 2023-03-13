@@ -7,8 +7,7 @@ import { BsFillCartPlusFill } from "react-icons/bs";
 
 export default function ProductsPage() {
   const navigate = useNavigate();
-  const { cart, setCart, products, setProducts, addToCart, removeFromCart } =
-    useContext(UserContext);
+  const { cart, products, setProducts, addToCart } = useContext(UserContext);
   const [page, setPage] = useState(0);
   const [lastPage, setLastPage] = useState(0);
   useEffect(() => {

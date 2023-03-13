@@ -3,38 +3,15 @@ import { UserContext } from "../UserContext";
 import axios from "axios";
 import validator from "validator";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  Card,
-  ListGroup,
-  Modal,
-  Button,
-  Form,
-  Row,
-  Col,
-  Alert,
-} from "react-bootstrap";
+import { Card, Button, Form, Row, Col, Alert } from "react-bootstrap";
 
 export default function UpdateUser() {
   const { id } = useParams();
   const [updateError, setUpdateError] = useState(null);
   const [editProfile, setEditProfile] = useState(false);
   const navigate = useNavigate();
-  const {
-    token,
-    setToken,
-    userId,
-    setUserId,
-    isLoggedIn,
-    setIsLoggedIn,
-    cart,
-    setCart,
-    userName,
-    setUserName,
-    userRole,
-    setUserRole,
-    userData,
-    setUserData,
-  } = useContext(UserContext);
+  const { token, userId, userName, setUserName, userData, setUserData } =
+    useContext(UserContext);
   const updateUserFunc = (e) => {
     e.preventDefault();
     if (

@@ -12,16 +12,8 @@ export default function Cart() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const navigate = useNavigate();
-  const {
-    token,
-    setToken,
-    userId,
-    setUserId,
-    cart,
-    setCart,
-    addToCart,
-    removeFromCart,
-  } = useContext(UserContext);
+  const { token, userId, cart, setCart, removeFromCart } =
+    useContext(UserContext);
 
   let total = cart.reduce((acc, e, i) => {
     return acc + e.price;

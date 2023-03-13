@@ -12,14 +12,11 @@ export default function UserInfo() {
     setUserId,
     isLoggedIn,
     setIsLoggedIn,
-    cart,
-    setCart,
     userName,
     setUserName,
     userRole,
     setUserRole,
     userData,
-    setUserData,
   } = useContext(UserContext);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);

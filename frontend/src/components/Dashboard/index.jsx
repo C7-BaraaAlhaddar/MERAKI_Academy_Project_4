@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Container, ListGroup, Card } from "react-bootstrap";
 import { UserContext } from "../UserContext";
-import axios from "axios";
 import { useNavigate, Route, Routes } from "react-router-dom";
 import Orders from "../orders";
 import UsersDashboard from "../UsersDashboard";

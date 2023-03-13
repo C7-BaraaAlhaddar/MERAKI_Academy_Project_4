@@ -14,16 +14,8 @@ import {
 
 export default function Home() {
   const navigate = useNavigate();
-  const {
-    cart,
-    setCart,
-    products,
-    setProducts,
-    categories,
-    setCategories,
-    addToCart,
-    removeFromCart,
-  } = useContext(UserContext);
+  const { cart, products, setProducts, setCategories, addToCart } =
+    useContext(UserContext);
 
   useEffect(() => {
     axios
