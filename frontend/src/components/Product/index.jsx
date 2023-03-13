@@ -206,6 +206,7 @@ export default function Product() {
                         )
                         .then((result) => {
                           setReviews([...reviews, result.data.comment]);
+                          e.target[0].value = "";
                         })
                         .catch((error) =>
                           console.log(error.response.data.message)

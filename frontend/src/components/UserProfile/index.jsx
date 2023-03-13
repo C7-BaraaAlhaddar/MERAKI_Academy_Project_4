@@ -30,7 +30,7 @@ export default function UserProfile() {
   return (
     <Container>
       <div className="row">
-        <div className="col-md-3">
+        <div style={{ marginBottom: "10px" }} className="col-md-3">
           {" "}
           <Card>
             <Card.Body>

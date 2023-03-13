@@ -15,7 +15,6 @@ export default function ProductsPage() {
     axios
       .get(`http://localhost:5000/product?from=${page}`)
       .then((result) => {
-        // console.log(result.data.length);
         if (result.data.products) {
           setProducts(result.data.products);
           localStorage.setItem(
