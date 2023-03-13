@@ -120,7 +120,9 @@ export default function Cart() {
               {" "}
               <div>
                 {" "}
-                <h1 style={{ margin: "300px" }}>Your Cart is Empty</h1>
+                <h1 style={{ margin: "300px 0 300px 0" }}>
+                  Your Cart is Empty
+                </h1>
                 <p>
                   <Link to={"/"}>return home</Link>
                 </p>

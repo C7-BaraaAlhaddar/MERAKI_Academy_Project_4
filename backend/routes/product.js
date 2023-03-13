@@ -19,7 +19,7 @@ const authorization = require("../middleware/authorization");
 //
 const productRouter = express.Router();
 //
-productRouter.get("/", adminGetAllProducts);
+productRouter.get("/", getAllProducts);
 productRouter.get(
   "/admin",
   authentication,
