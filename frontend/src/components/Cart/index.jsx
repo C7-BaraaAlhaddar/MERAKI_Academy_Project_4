@@ -8,9 +8,6 @@ import axios from "axios";
 export default function Cart() {
   const [errorMsg, setErrorMsg] = useState(null);
   const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const navigate = useNavigate();
   const { token, userId, cart, setCart, removeFromCart } =
     useContext(UserContext);
@@ -18,7 +15,6 @@ export default function Cart() {
   let total = cart.reduce((acc, e, i) => {
     return acc + e.price;
   }, 0);
-  console.log(total);
   return (
     <>
       <Container>
@@ -79,30 +75,10 @@ export default function Cart() {
                     <strong>Total : {total} JD</strong>{" "}
                   </Card.Title>
                   <Button
-                    onClick={(e) => {
-                      axios
-                        .post(
-                          `http://localhost:5000/order`,
-                          {
-                            user: userId,
-                            orders: cart.map((e) => e._id),
-                            total: total,
-                            paymentMethod: "cash",
-                            shipping: false,
-                            successfulPayment: false,
-                          },
-                          { headers: { Authorization: `Bearer ${token}` } }
-                        )
-                        .then(() => {
-                          handleShow();
-                        })
-                        .catch((error) =>
-                          console.log(error.response.data.message)
-                        );
-                    }}
+                    onClick={(e) => navigate("/checkout")}
                     variant="warning"
                   >
-                    Place order
+                    Proceed to checkout
                   </Button>
                 </div>
               </Card>
@@ -122,26 +98,6 @@ export default function Cart() {
             </>
           )}
         </div>
-        <>
-          <Modal backdrop="static" show={show} onHide={handleClose}>
-            <Modal.Header>
-              <Modal.Title>B store</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Order sent successfully</Modal.Body>
-            <Modal.Footer>
-              <Button
-                variant="secondary"
-                onClick={(e) => {
-                  handleClose();
-                  setCart([]);
-                  navigate("/");
-                }}
-              >
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </>
       </Container>
     </>
   );

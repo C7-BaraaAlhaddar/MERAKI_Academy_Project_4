@@ -14,6 +14,7 @@ import CategoryPage from "./components/CategoryPage";
 import Cart from "./components/Cart";
 import SearchPage from "./components/SearchPage";
 import Dashboard from "./components/Dashboard";
+import Checkout from "./components/Checkout";
 
 function App() {
   return (
@@ -89,6 +90,15 @@ function App() {
           element={
             <>
               <Cart />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <>
+              <Checkout />
               <Footer />
             </>
           }
