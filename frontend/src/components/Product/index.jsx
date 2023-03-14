@@ -245,13 +245,21 @@ export default function Product() {
               {reviews.map((review) => {
                 return (
                   <Card style={{ margin: "10px" }} key={review._id}>
-                    <Card.Header>
+                    <Card.Header
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <div>
+                        <strong>{`${review.user.firstName} ${review.user.lastName}`}</strong>
+                      </div>
                       <Rating name="read-only" value={review.rate} readOnly />
                     </Card.Header>
                     <Card.Body>{review.comment}</Card.Body>
                     <Card.Footer>
                       {userRole === "admin" ||
-                        (review.user === userId && (
+                        (review.user._id === userId && (
                           <Button
                             onClick={(e) => {
                               axios

@@ -1,5 +1,6 @@
 const productModel = require("../models/product");
-
+const reviewModel = require("../models/review");
+const userModel = require("../models/user");
 //
 
 // create a product
@@ -104,7 +105,15 @@ const getProductById = (req, res) => {
   productModel
     .findById(id)
     .populate("category")
-    .populate("reviews")
+    .populate({
+      path: "reviews",
+      model: reviewModel,
+      populate: {
+        path: "user",
+        model: userModel,
+        select: "firstName lastName _id",
+      },
+    })
     .exec()
     .then((product) => {
       if (!product) {
@@ -113,6 +122,7 @@ const getProductById = (req, res) => {
           message: `The product with id => ${id} not found`,
         });
       }
+
       res.status(200).json({
         success: true,
         message: `The product ${id} `,
