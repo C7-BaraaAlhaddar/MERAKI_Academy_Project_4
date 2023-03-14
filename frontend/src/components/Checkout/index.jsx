@@ -30,7 +30,26 @@ export default function Checkout() {
             <strong>checkout</strong>
           </Card.Header>
           <Card.Body>
-            <div className="row">
+            <div className="row gy-4">
+              <div className="col-md">
+                {" "}
+                <ListGroup>
+                  <ListGroup.Item variant="secondary">
+                    <strong>Cart</strong>
+                  </ListGroup.Item>
+                  {cart.map((product) => {
+                    return (
+                      <ListGroup.Item>
+                        {product.label} <strong>{product.price}JD</strong>{" "}
+                      </ListGroup.Item>
+                    );
+                  })}
+
+                  <ListGroup.Item variant="secondary">
+                    <strong>Total: {total} JD</strong>
+                  </ListGroup.Item>
+                </ListGroup>
+              </div>
               <div className="col-md">
                 <div>
                   <h3>Choose your Payment Method</h3>
@@ -72,25 +91,6 @@ export default function Checkout() {
                   </Button>
                   <Button>Pay Online</Button>
                 </div>
-              </div>
-              <div className="col-md">
-                {" "}
-                <ListGroup>
-                  <ListGroup.Item variant="secondary">
-                    <strong>Cart</strong>
-                  </ListGroup.Item>
-                  {cart.map((product) => {
-                    return (
-                      <ListGroup.Item>
-                        {product.label} <strong>{product.price}JD</strong>{" "}
-                      </ListGroup.Item>
-                    );
-                  })}
-
-                  <ListGroup.Item variant="secondary">
-                    <strong>Total: {total} JD</strong>
-                  </ListGroup.Item>
-                </ListGroup>
               </div>
             </div>
           </Card.Body>
