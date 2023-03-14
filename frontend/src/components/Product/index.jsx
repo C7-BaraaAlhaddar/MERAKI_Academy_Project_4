@@ -257,37 +257,38 @@ export default function Product() {
                       <Rating name="read-only" value={review.rate} readOnly />
                     </Card.Header>
                     <Card.Body>{review.comment}</Card.Body>
-                    <Card.Footer>
-                      {userRole === "admin" ||
-                        (review.user._id === userId && (
-                          <Button
-                            onClick={(e) => {
-                              axios
-                                .put(
-                                  `http://localhost:5000/product/review2/${review._id}`,
-                                  {
-                                    _id: productData._id,
+                    <Card.Footer
+                      style={{ display: "flex", flexDirection: "row-reverse" }}
+                    >
+                      {(userRole === "admin" || review.user._id === userId) && (
+                        <Button
+                          onClick={(e) => {
+                            axios
+                              .put(
+                                `http://localhost:5000/product/review2/${review._id}`,
+                                {
+                                  _id: productData._id,
+                                },
+                                {
+                                  headers: {
+                                    Authorization: `Bearer ${token}`,
                                   },
-                                  {
-                                    headers: {
-                                      Authorization: `Bearer ${token}`,
-                                    },
-                                  }
-                                )
-                                .then((result) => {
-                                  setReviews(
-                                    reviews.filter((e) => e._id !== review._id)
-                                  );
-                                })
-                                .catch((error) =>
-                                  console.log(error.response.data.message)
+                                }
+                              )
+                              .then((result) => {
+                                setReviews(
+                                  reviews.filter((e) => e._id !== review._id)
                                 );
-                            }}
-                            variant="danger"
-                          >
-                            Delete review
-                          </Button>
-                        ))}
+                              })
+                              .catch((error) =>
+                                console.log(error.response.data.message)
+                              );
+                          }}
+                          variant="danger"
+                        >
+                          Delete review
+                        </Button>
+                      )}
                     </Card.Footer>
                   </Card>
                 );
