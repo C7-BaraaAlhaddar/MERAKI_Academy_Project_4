@@ -1,6 +1,6 @@
 const reviewModel = require("../models/review");
 const productModel = require("../models/product");
-
+const userModel = require("../models/user");
 const createNewReview = (req, res) => {
   const _id = req.params.id;
   const { comment, rate } = req.body;
@@ -13,20 +13,36 @@ const createNewReview = (req, res) => {
   newReview
     .save()
     .then((result) => {
-      productModel
-        .findByIdAndUpdate(
-          { _id },
-          { $push: { reviews: result._id } },
-          { new: true }
-        )
-        .then((product) => {
-          res.status(201).json({
-            success: true,
-            message: `Review added`,
-            comment: result,
-            product: product,
-          });
+      reviewModel
+        .findById(result._id)
+        .populate("user", "firstName lastName _id")
+        .then((comment) => {
+          productModel
+            .findByIdAndUpdate(
+              { _id },
+              { $push: { reviews: result._id } },
+              { new: true }
+            )
+            .populate({
+              path: "reviews",
+              model: reviewModel,
+              populate: {
+                path: "user",
+                model: userModel,
+                select: "firstName lastName _id",
+              },
+            })
+            .exec()
+            .then((product) => {
+              res.status(201).json({
+                success: true,
+                message: `Review added`,
+                comment: comment,
+                product: product,
+              });
+            });
         })
+
         .catch((err) => {
           res.status(500).json({
             success: false,

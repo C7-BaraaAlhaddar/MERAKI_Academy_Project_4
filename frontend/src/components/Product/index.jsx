@@ -196,6 +196,7 @@ export default function Product() {
                           { headers: { Authorization: `Bearer ${token}` } }
                         )
                         .then((result) => {
+                          console.log(result.data);
                           setReviews([...reviews, result.data.comment]);
                           e.target[0].value = "";
                         })

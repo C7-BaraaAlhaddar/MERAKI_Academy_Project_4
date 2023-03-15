@@ -1,13 +1,11 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../UserContext";
-import { Container, Card, Button, Modal } from "react-bootstrap";
+import { Container, Card, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import axios from "axios";
 
 export default function Cart() {
   const [errorMsg, setErrorMsg] = useState(null);
-  const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const { token, userId, cart, setCart, removeFromCart } =
     useContext(UserContext);
