@@ -8,12 +8,12 @@ import { BrowserRouter } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <GoogleOAuthProvider clientId="1050103270020-bba0cn8jn4nf9rlj25i63lmm3j24g36n.apps.googleusercontent.com">
-    {/* <React.StrictMode> */}
-    <UserContextProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </UserContextProvider>
-    {/* </React.StrictMode> */}
+    <React.StrictMode>
+      <UserContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </UserContextProvider>
+    </React.StrictMode>
   </GoogleOAuthProvider>
 );

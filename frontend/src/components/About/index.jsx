@@ -1,27 +1,13 @@
-import React, { useRef, useEffect, useState } from "react";
+import React from "react";
 import { Accordion, Container, Card } from "react-bootstrap";
-import { useNavigate, Link } from "react-router-dom";
+import Map, { Marker } from "react-map-gl";
+import { Link } from "react-router-dom";
 import { BsInstagram, BsTwitter, BsFacebook } from "react-icons/bs";
 import mapboxgl from "mapbox-gl";
 mapboxgl.accessToken =
   "pk.eyJ1IjoiYmFyYWEtYWxoYWRkYXIiLCJhIjoiY2xmOXprcHRhMTEyczNzbzR0Zjc1cGpocCJ9.c8nIRe52BoWy_MCZNPGhcA";
 
 export default function About() {
-  const mapContainer = useRef(null);
-  const map = useRef(null);
-  const [lng, setLng] = useState(36.102744146249144);
-  const [lat, setLat] = useState(32.08101420061598);
-  const [zoom, setZoom] = useState(18);
-  useEffect(() => {
-    if (map.current) return;
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: "mapbox://styles/mapbox/streets-v12",
-      center: [lng, lat],
-      zoom: zoom,
-    });
-  });
-
   return (
     <div style={{ margin: "10px" }}>
       <Container>
@@ -54,7 +40,27 @@ export default function About() {
                   </Card.Header>
                   <Card.Body>
                     {" "}
-                    <div ref={mapContainer} className="map-container" />
+                    <Map
+                      initialViewState={{
+                        longitude: 36.102744146249144,
+                        latitude: 32.08101420061598,
+                        zoom: 14,
+                      }}
+                      style={{ width: "100%", height: 400 }}
+                      mapStyle="mapbox://styles/mapbox/streets-v9"
+                    >
+                      {" "}
+                      <Marker
+                        longitude={36.102744146249144}
+                        latitude={32.08101420061598}
+                        anchor="bottom"
+                      >
+                        <img
+                          style={{ height: "60px", width: "60px" }}
+                          src="mapbox-icon.png"
+                        />
+                      </Marker>
+                    </Map>
                   </Card.Body>
                 </Card>{" "}
               </div>
