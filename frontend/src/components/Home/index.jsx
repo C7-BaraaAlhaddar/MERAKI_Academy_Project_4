@@ -5,12 +5,8 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import Hero from "../Hero";
 import About from "../About";
-import {
-  BsFillCartPlusFill,
-  BsInstagram,
-  BsTwitter,
-  BsFacebook,
-} from "react-icons/bs";
+
+import { BsFillCartPlusFill } from "react-icons/bs";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -108,37 +104,6 @@ export default function Home() {
         </Container>
       </div>
       <About />
-      <div>
-        <Container>
-          <div
-            style={{
-              maxWidth: "50%",
-              display: "flex",
-              justifyContent: "space-between",
-              margin: "auto",
-              padding: "10px",
-            }}
-          >
-            <Link target={"_blank"} to={`https://twitter.com/baraaweeb`}>
-              <BsTwitter size={30} />
-            </Link>
-            <Link
-              target={"_blank"}
-              style={{ color: "black" }}
-              to={`https://www.instagram.com/baraaweeb/`}
-            >
-              <BsInstagram size={30} />
-            </Link>
-            <Link
-              target={"_blank"}
-              to={`https://web.facebook.com/baraa.alhaddar/`}
-            >
-              {" "}
-              <BsFacebook size={30} />
-            </Link>
-          </div>
-        </Container>
-      </div>
     </div>
   );
 }

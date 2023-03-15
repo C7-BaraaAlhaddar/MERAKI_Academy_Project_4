@@ -161,7 +161,7 @@ export default function Product() {
                     }}
                   >
                     <h5>
-                      <strong>Write a review :</strong>
+                      <strong>Write a review </strong>
                     </h5>{" "}
                     <div style={{ display: "flex" }}>
                       {" "}
@@ -172,6 +172,7 @@ export default function Product() {
                         </Badge>
                       </h5>
                       <Rating
+                        style={{ marginTop: "3px" }}
                         name="simple-controlled"
                         value={value}
                         onChange={(event, newValue) => {

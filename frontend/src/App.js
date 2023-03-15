@@ -15,6 +15,7 @@ import Cart from "./components/Cart";
 import SearchPage from "./components/SearchPage";
 import Dashboard from "./components/Dashboard";
 import Checkout from "./components/Checkout";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 function App() {
   return (

@@ -49,3 +49,7 @@ body {
 button:active {
   scale: 98%;
 }
+.map-container {
+  height: 400px;
+  width: 100%;
+}
