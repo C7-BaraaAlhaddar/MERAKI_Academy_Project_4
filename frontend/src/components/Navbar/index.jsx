@@ -72,7 +72,7 @@ export default function NavbarMenu() {
             }}
           >
             <img
-              style={{ width: "40px", margin: "auto" }}
+              style={{ width: "36px", margin: "auto" }}
               src="logo.png"
               alt="logo"
             />

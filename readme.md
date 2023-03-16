@@ -76,6 +76,10 @@ Now app ready to use
 
 - You don't have to register to navigate our web app
 - You can click on the **B Store Logo** tab provided in the navigation bar to view the home section
+- You can become a user by registering when you click the **account** drop down menu in the navbar
+- users can also register using google accounts
+- after registering the user will be redirected to the login page or by clicking the **account** dropdown menu and clicking login
+- a user can update or delete there info by clicking on the **account** dropdown menu and clicking account
 - You can click on the **Add to cart** button to add this product to your cart but you have to be one of our users, so you should create an account
 - You Can place an order without using a credit cart we have pay on delivery
 - You can see other people reviews about our product without registering or logging in
@@ -87,6 +91,7 @@ Now app ready to use
 - In the **admin dashboard** you can update or remove products from the **products** menu also you can see the orders in the **orders** menu and you can remove or place as delivered in there , admins can also see users info and delete them from the **users** menu
 - Admins can create new products in the **admin dashboard** from the create new product menu
 - Admins can remove any review they want from the product page
+- When routing to a wrong page on the site the app will redirect the user to a 404 page
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
