@@ -4,7 +4,7 @@
  </a>
 </p>
 
-<h3 align="center">Project Title
+<h3 align="center">B Store
 </h3>
 
 ---
@@ -27,9 +27,11 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+Looking to get a new smartphone, Laptop and you couldn't find any good stores around ?
 
-Ex. Are you looking for a quick and easy way to action, action, and action? The **(name of application)** is the greatest and most accurate application to do this for you. It helps you to **(list of activities)**. The **(name of application)** provides a simple design to ensure having the best user experience.
+Here at **B Store** you'll find everything you need about tec products with the best prices on the market not only this the shipping is **Free !!**.
+
+Imagine a website that has it all.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -47,7 +49,7 @@ These instructions will get you a copy of the project up and running on your loc
 1. Clone the repo to your local machine using git bash.
 
 ```
-git clone https://github.com/your_username_/Project-Name.git
+git clone https://github.com/C7-BaraaAlhaddar/MERAKI_Academy_Project_4.git
 ```
 
 2. Install packeges repeat this step in backend and frontend folder
@@ -72,13 +74,19 @@ Now app ready to use
 
 ## 🎈 Usage <a name="usage"></a>
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-Ex.
-
 - You don't have to register to navigate our web app
-- You can click on the **Home** tab provided in the navigation bar to view the home section
+- You can click on the **B Store Logo** tab provided in the navigation bar to view the home section
 - You can click on the **Add to cart** button to add this product to your cart but you have to be one of our users, so you should create an account
+- You Can place an order without using a credit cart we have pay on delivery
+- You can see other people reviews about our product without registering or logging in
+- if your logged in you can write a review or delete your own reviews
+- Users can search for any product from the **Search bar** in the navbar
+- The cart page shows the users all there cart products and they can remove any product from there cart from there
+- The cart shows the total cost of the products in the cart and click on **go to checkout** button so they can get navigated the checkout page
+- admins can enter the admin dashboard menu by opening the dropdown menu in the nav bar called by there user name an then by clicking the **admin dashboard**
+- In the **admin dashboard** you can update or remove products from the **products** menu also you can see the orders in the **orders** menu and you can remove or place as delivered in there , admins can also see users info and delete them from the **users** menu
+- Admins can create new products in the **admin dashboard** from the create new product menu
+- Admins can remove any review they want from the product page
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
@@ -89,12 +97,12 @@ Ex.
 
 ## User Story <a name = "#user_story"></a>
 
-Your trello board link
-<a href=''>Trello</a>
+trello board link
+<a href='https://trello.com/b/6i1eyzr2/project-4'>Trello</a>
 
 ## Data Flow <a name = "#data_flow"></a>
 
-<img width=200px height=200px src="https://cacoo.com/assets/site/img/templates/screenshots/er-database-diagram.png" alt="Diagram"></a>
+<img width=200px height=200px src="https://res.cloudinary.com/dilqog4u7/image/upload/v1678984231/Screenshot_6_dgxyhb.png" alt="Diagram"></a>
 
 ## ⚠️ Guided By <a name = "guided_by"></a>
 
