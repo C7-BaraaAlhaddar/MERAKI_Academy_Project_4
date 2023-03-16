@@ -71,7 +71,11 @@ export default function NavbarMenu() {
               navigate("/");
             }}
           >
-            {" "}
+            <img
+              style={{ width: "40px", margin: "auto" }}
+              src="logo.png"
+              alt="logo"
+            />
             B Store
           </Navbar.Brand>
 
