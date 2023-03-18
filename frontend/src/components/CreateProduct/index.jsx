@@ -58,7 +58,7 @@ export default function CreateProduct() {
           <Form
             onSubmit={async (e) => {
               e.preventDefault();
-              await uploadImage();
+
               if (!pickedCategory) {
                 return setErrorMsg("Please choose a Category");
               }
@@ -69,105 +69,110 @@ export default function CreateProduct() {
               ) {
                 return setErrorMsg("All fields are required");
               }
-              if (
-                pickedCategory.categoryName === "Mobiles" ||
-                pickedCategory.categoryName === "Tablets"
-              ) {
-                axios
-                  .post(
-                    `http://localhost:5000/product`,
-                    {
-                      label: e.target[0].value,
-                      brand: e.target[1].value,
-                      price: e.target[2].value,
-                      img: url,
-                      category: pickedCategory._id,
-                      specs: {
-                        cpu: e.target[3].value,
-                        ram: e.target[4].value,
-                        battery: e.target[5].value,
-                        memory: e.target[6].value,
-                        frontCamera: e.target[7].value,
-                        backCamera: e.target[8].value,
-                        display: e.target[9].value,
+              try {
+                await uploadImage();
+                if (
+                  pickedCategory.categoryName === "Mobiles" ||
+                  pickedCategory.categoryName === "Tablets"
+                ) {
+                  axios
+                    .post(
+                      `http://localhost:5000/product`,
+                      {
+                        label: e.target[0].value,
+                        brand: e.target[1].value,
+                        price: e.target[2].value,
+                        img: url,
+                        category: pickedCategory._id,
+                        specs: {
+                          cpu: e.target[3].value,
+                          ram: e.target[4].value,
+                          battery: e.target[5].value,
+                          memory: e.target[6].value,
+                          frontCamera: e.target[7].value,
+                          backCamera: e.target[8].value,
+                          display: e.target[9].value,
+                        },
                       },
-                    },
-                    {
-                      headers: { Authorization: `Bearer ${token}` },
-                    }
-                  )
-                  .then((result) => {
-                    e.target[0].value = "";
-                    e.target[1].value = "";
-                    e.target[2].value = "";
-                    e.target[3].value = "";
-                    e.target[4].value = "";
-                    e.target[5].value = "";
-                    e.target[6].value = "";
-                    e.target[7].value = "";
-                    e.target[8].value = "";
-                    e.target[9].value = "";
-                    setErrorMsg(null);
-                    navigate("/dashboard/products");
-                  })
-                  .catch((error) => setErrorMsg(error.response.data.message));
-              } else if (pickedCategory.categoryName === "Laptops") {
-                axios
-                  .post(
-                    `http://localhost:5000/product`,
-                    {
-                      label: e.target[0].value,
-                      brand: e.target[1].value,
-                      price: e.target[2].value,
-                      img: url,
-                      category: pickedCategory._id,
-                      specs: {
-                        cpu: e.target[3].value,
-                        ram: e.target[4].value,
-                        gpu: e.target[5].value,
-                        monitor: e.target[6].value,
+                      {
+                        headers: { Authorization: `Bearer ${token}` },
+                      }
+                    )
+                    .then((result) => {
+                      e.target[0].value = "";
+                      e.target[1].value = "";
+                      e.target[2].value = "";
+                      e.target[3].value = "";
+                      e.target[4].value = "";
+                      e.target[5].value = "";
+                      e.target[6].value = "";
+                      e.target[7].value = "";
+                      e.target[8].value = "";
+                      e.target[9].value = "";
+                      setErrorMsg(null);
+                      navigate("/dashboard/products");
+                    })
+                    .catch((error) => setErrorMsg(error.response.data.message));
+                } else if (pickedCategory.categoryName === "Laptops") {
+                  axios
+                    .post(
+                      `http://localhost:5000/product`,
+                      {
+                        label: e.target[0].value,
+                        brand: e.target[1].value,
+                        price: e.target[2].value,
+                        img: url,
+                        category: pickedCategory._id,
+                        specs: {
+                          cpu: e.target[3].value,
+                          ram: e.target[4].value,
+                          gpu: e.target[5].value,
+                          monitor: e.target[6].value,
+                        },
                       },
-                    },
-                    {
-                      headers: { Authorization: `Bearer ${token}` },
-                    }
-                  )
-                  .then((result) => {
-                    e.target[0].value = "";
-                    e.target[1].value = "";
-                    e.target[2].value = "";
-                    e.target[3].value = "";
-                    e.target[4].value = "";
-                    e.target[5].value = "";
-                    e.target[6].value = "";
+                      {
+                        headers: { Authorization: `Bearer ${token}` },
+                      }
+                    )
+                    .then((result) => {
+                      e.target[0].value = "";
+                      e.target[1].value = "";
+                      e.target[2].value = "";
+                      e.target[3].value = "";
+                      e.target[4].value = "";
+                      e.target[5].value = "";
+                      e.target[6].value = "";
 
-                    setErrorMsg(null);
-                    navigate("/dashboard/products");
-                  })
-                  .catch((error) => setErrorMsg(error.response.data.message));
-              } else {
-                axios
-                  .post(
-                    `http://localhost:5000/product`,
-                    {
-                      label: e.target[0].value,
-                      brand: e.target[1].value,
-                      price: e.target[2].value,
-                      img: url,
-                      category: pickedCategory._id,
-                    },
-                    {
-                      headers: { Authorization: `Bearer ${token}` },
-                    }
-                  )
-                  .then((result) => {
-                    e.target[0].value = "";
-                    e.target[1].value = "";
-                    e.target[2].value = "";
-                    setErrorMsg(null);
-                    navigate("/dashboard/products");
-                  })
-                  .catch((error) => setErrorMsg(error.response.data.message));
+                      setErrorMsg(null);
+                      navigate("/dashboard/products");
+                    })
+                    .catch((error) => setErrorMsg(error.response.data.message));
+                } else {
+                  axios
+                    .post(
+                      `http://localhost:5000/product`,
+                      {
+                        label: e.target[0].value,
+                        brand: e.target[1].value,
+                        price: e.target[2].value,
+                        img: url,
+                        category: pickedCategory._id,
+                      },
+                      {
+                        headers: { Authorization: `Bearer ${token}` },
+                      }
+                    )
+                    .then((result) => {
+                      e.target[0].value = "";
+                      e.target[1].value = "";
+                      e.target[2].value = "";
+                      setErrorMsg(null);
+                      navigate("/dashboard/products");
+                    })
+                    .catch((error) => setErrorMsg(error.response.data.message));
+                }
+              } catch (error) {
+                throw error;
               }
             }}
           >
