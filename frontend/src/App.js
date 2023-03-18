@@ -31,8 +31,22 @@ function App() {
             </>
           }
         />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/register"
+          element={
+            <>
+              <Register /> <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <>
+              <Login /> <Footer />
+            </>
+          }
+        />
         <Route
           path="/profile/:id/*"
           element={
