@@ -10,7 +10,7 @@ import {
   Offcanvas,
   ListGroup,
 } from "react-bootstrap";
-import { BsSearch, BsFillLaptopFill } from "react-icons/bs";
+import { BsSearch } from "react-icons/bs";
 import { UserContext } from "../UserContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";

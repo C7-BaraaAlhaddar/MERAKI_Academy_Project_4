@@ -88,7 +88,11 @@ export default function Register() {
             <Card.Title style={{ fontSize: "50px" }}>Sign Up</Card.Title>
           </Container>
 
-          <Form onSubmit={registerFunc}>
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
             <Row className="mb-3">
               <Form.Group as={Col} controlId="registerFName">
                 <Form.Label>First Name</Form.Label>
@@ -146,14 +150,7 @@ export default function Register() {
                 justifyContent: "center",
                 margin: "10px",
               }}
-            >
-              <GoogleLogin
-                onSuccess={googleRegisterSuccess}
-                onError={(errorMessage) => {
-                  console.log(errorMessage);
-                }}
-              />
-            </div>
+            ></div>
             <Card.Text
               style={{ fontSize: "15px", padding: "5px", margin: "5px" }}
             >

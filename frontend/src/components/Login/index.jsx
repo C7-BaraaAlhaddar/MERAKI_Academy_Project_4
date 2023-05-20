@@ -121,14 +121,7 @@ export default function Login() {
                 justifyContent: "center",
                 margin: "10px",
               }}
-            >
-              <GoogleLogin
-                onSuccess={googleLoginSuccess}
-                onError={(errorMessage) => {
-                  console.log(errorMessage);
-                }}
-              />
-            </div>
+            ></div>
             <Card.Text
               style={{ fontSize: "15px", padding: "5px", margin: "5px" }}
             >
